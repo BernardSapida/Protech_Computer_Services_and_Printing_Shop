@@ -5,7 +5,6 @@
 
     $db = new Database();
 
-
     if(count($_POST) > 0) {
         $uid = uniqid(rand(0,999));
         $image = "default.jpg";
@@ -36,5 +35,7 @@
                 "type" => "client",
             )
         );
+
+        header("Location: index.php?page=signin");
     }
 ?>

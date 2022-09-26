@@ -116,7 +116,23 @@
                         $stmt->execute();
                     };
                     break;
-                }
+                case "client_concerns":
+                    {
+                        $firstname = $data['firstname'];
+                        $lastname = $data['lastname'];
+                        $email = $data['email'];
+                        $message = $data['message'];
+
+                        $stmt = $conn->prepare("INSERT INTO `$tableName` (`firstname`, `lastname`, `email`, `message`) VALUES (:firstname, :lastname, :email, :message)");
+                        $stmt -> bindParam(':firstname', $firstname);
+                        $stmt -> bindParam(':lastname', $lastname);
+                        $stmt -> bindParam(':email', $email);
+                        $stmt -> bindParam(':message', $message);
+                        $stmt->execute();
+                    }
+                    break;
+            }
+                
         }
 
         function updateData($conn, $tableName, $data, $account) {

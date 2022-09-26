@@ -244,8 +244,6 @@
                 const form = document.querySelector('.needs-validation');
                 const inputs = document.querySelectorAll('input');
 
-                const { firstname, lastname, email, address, contact, gcashName, gcashNumber, password, confirmPassword, validFirstname, validLastname, validEmail, validAddress, validContact, validGcashName, validGcashNumber, validPassword, validConfirmPassword } = this;
-                
                 this.isSubmitted = true;
 
                 this.validateFirstname();
@@ -258,8 +256,16 @@
                 this.validatePassword();
                 this.validateConfirmPassword();
 
+                const { firstname, lastname, email, address, contact, gcashName, gcashNumber, password, confirmPassword, validFirstname, validLastname, validEmail, validAddress, validContact, validGcashName, validGcashNumber, validPassword, validConfirmPassword } = this;
+
+
                 if(validFirstname && validLastname && validEmail && validAddress && validContact && validGcashName && validGcashNumber && validAddress && validPassword && validConfirmPassword) {
-                    form.submit();
+                    swal({
+                        title: "Account successfully created!",
+                        text: "You can now use your account to sign in",
+                        icon: "success",
+                        button: "Okay",
+                    }).then((okay) => form.submit());
                 }
 
             },
@@ -273,6 +279,10 @@
                     }
                     else if(firstname.length < 2) {
                         this.errFirstname = "First name is too short";
+                        this.validFirstname = false;
+                    }
+                    else if(!/^[A-z]+$/.test(firstname)) {
+                        this.errFirstname = "First name is invalid";
                         this.validFirstname = false;
                     }
                     else this.validFirstname = true;
@@ -289,6 +299,10 @@
                     else if(lastname.length < 2) {
                         this.errLastname = "Lastname is too short";
                         this.validLastname = false;
+                    }
+                    else if(!/^[A-z]+$/.test(lastname)) {
+                        this.errFirstname = "First name is invalid";
+                        this.validFirstname = false;
                     }
                     else this.validLastname = true;
                 }

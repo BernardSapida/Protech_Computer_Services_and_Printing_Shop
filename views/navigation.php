@@ -47,12 +47,12 @@
                     switch($visitor) {
                         case "client":
                             {
-                                echo '<a class="nav-link" href="index.php?page=signout"><button class="nav-link btn btn-primary text-white px-3">Signout</button></a>';
+                                echo '<a class="nav-link" href="index.php?page=signout"><button class="nav-link btn btn-outline-dark px-3">Sign out</button></a>';
                             }
                             break;
                         case "admin":
                             {
-                                echo '<a class="nav-link" href="index.php?page=signout"><button class="nav-link btn btn-primary text-white px-3">Signout</button></a>';
+                                echo '<a class="nav-link" href="index.php?page=signout"><button class="nav-link btn btn-outline-dark px-3">Sign out</button></a>';
                             }
                             break;
                         default:

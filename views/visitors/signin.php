@@ -107,7 +107,13 @@
                         this.errPassword = "Password is incorrect";
                         this.validPassword = false;
                     }
-                    else if(response.data == "Authorized") window.location.href = "index.php?page=services";
+                    else if(response.data == "Authorized") {
+                        swal({
+                            title: "Successfully signed in!",
+                            icon: "success",
+                            button: "Okay",
+                        }).then((okay) => window.location.href = "index.php?page=services");
+                    }
                 }
             },
             validateEmail() {
