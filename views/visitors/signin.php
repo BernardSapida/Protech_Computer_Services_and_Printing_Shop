@@ -17,21 +17,19 @@
                                     </div>
                                     <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
                                     <div class="form-outline mb-4">
-                                        <label class="form-label" for="form2Example17">Email address</label>
-                                        <input type="email" id="form2Example17" :class="['form-control', 'form-control-lg']" placeholder="Email address" required/>
-                                        <div class="invalid-feedback">Firstname is required</div>
+                                        <label class="form-label" for="email">Email address</label>
+                                        <input type="email" id="email" :class="['form-control', 'form-control-lg']" placeholder="Email address" required/>
+                                        <div class="invalid-feedback">{{emailError}}</div>
                                     </div>
                                     <div class="form-outline mb-4">
-                                        <label class="form-label" for="form2Example27">Password</label>
-                                        <input type="password" id="form2Example27" :class="['form-control', 'form-control-lg']" placeholder="Password" required/>
-                                        <div class="invalid-feedback">Firstname is required</div>
+                                        <label class="form-label" for="password">Password</label>
+                                        <input type="password" id="password" :class="['form-control', 'form-control-lg']" placeholder="Password" required/>
+                                        <div class="invalid-feedback">{{passwordError}}</div>
                                     </div>
                                     <div class="d-grid">
                                         <button class="btn btn-dark" type="submit">Signin</button>
                                     </div>
                                     <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a href="index.php?page=signup" style="color: #393f81;">Signup here</a></p>
-                                    <a href="#!" class="small text-muted">Terms of use.</a>
-                                    <a href="#!" class="small text-muted">Privacy policy</a>
                                 </form>
                             </div>
                         </div>
@@ -46,29 +44,18 @@
     const { createApp } = Vue
 
     createApp({
-        mounted() {
-            this.submitForm();
-        },
         data() {
             return {
                 email: "",
                 password: "",
+                emailError: "Email address is required",
+                passwordError: "Password is required",
             }
         },
         methods: {
             submitForm() {
-                const forms = document.querySelectorAll('.needs-validation')
-
-                Array.from(forms).forEach(form => {
-                    form.addEventListener('submit', event => {
-                        if (!form.checkValidity()) {
-                            event.preventDefault()
-                            event.stopPropagation()
-                        }
-
-                        form.classList.add('was-validated')
-                    }, false)
-                })
+                const forms = document.querySelector('.needs-validation')
+                forms.classList.add('was-validated')
             }
         }
     }).mount('#app')

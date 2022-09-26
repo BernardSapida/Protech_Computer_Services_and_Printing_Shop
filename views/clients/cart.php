@@ -46,9 +46,9 @@
                         <div class="invalid-feedback">Email is required</div>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="barangay">Barangay</label>
-                        <input type="text" :class="['form-control']" v-model="barangay" id="barangay" placeholder="Barangay" required/>
-                        <div class="invalid-feedback">Barangay is required</div>
+                        <label class="form-label" for="address">Address</label>
+                        <input type="text" :class="['form-control']" v-model="address" id="address" placeholder="Address" required/>
+                        <div class="invalid-feedback">Address is required</div>
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-12">

@@ -6,16 +6,65 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav me-auto mb-2 mb-lg-0">
-                <a class="nav-link" href="index.php?page=home">Home</a>
-                <a class="nav-link" href="index.php?page=services">Services</a>
-                <a class="nav-link" href="index.php?page=cart">Cart</a>
-                <a class="nav-link" href="index.php?page=status">Order Status</a>
-                <a class="nav-link" href="index.php?page=contactus">Contact Us</a>
-                <a class="nav-link" href="index.php?page=myaccount">My Account</a>
+                <?php
+                    session_start();
+
+                    $visitor = empty($_SESSION["type"]) ? "" : $_SESSION["type"];
+
+                    switch($visitor) {
+                        case "client":
+                            {
+                                echo '
+                                <a class="nav-link" href="index.php?page=home">Home</a>
+                                <a class="nav-link" href="index.php?page=services">Services</a>
+                                <a class="nav-link" href="index.php?page=cart">Cart</a>
+                                <a class="nav-link" href="index.php?page=status">Order Status</a>
+                                <a class="nav-link" href="index.php?page=contactus">Contact Us</a>
+                                <a class="nav-link" href="index.php?page=myaccount">My Account</a>';
+                            }
+                            break;
+                        case "admin":
+                            {
+                                echo '
+                                <a class="nav-link" href="index.php?page=clientorders">Client Orders</a>
+                                <a class="nav-link" href="index.php?page=clientaccounts">Client Accounts</a>
+                                <a class="nav-link" href="index.php?page=clientmessages">Client Messages</a>';
+                            }
+                            break;
+                        default:
+                            {
+                                echo '
+                                <a class="nav-link" href="index.php?page=home">Home</a>
+                                <a class="nav-link" href="index.php?page=services">Services</a>
+                                <a class="nav-link" href="index.php?page=contactus">Contact Us</a>';
+                            }
+                            break;
+                    }
+                ?>
             </div>
             <div class="navbar-nav">
-                <a class="nav-link" href="index.php?page=signin"><button class="nav-link btn btn-outline-secondary px-3">Signup</button></a>
-                <a class="nav-link" href="index.php?page=signin"><button class="nav-link btn btn-primary text-white px-3">Signin</button></a>
+                <?php
+                    switch($visitor) {
+                        case "client":
+                            {
+                                echo '<a class="nav-link" href="index.php?page=signout"><button class="nav-link btn btn-primary text-white px-3">Signout</button></a>';
+                            }
+                            break;
+                        case "admin":
+                            {
+                                echo '<a class="nav-link" href="index.php?page=signout"><button class="nav-link btn btn-primary text-white px-3">Signout</button></a>';
+                            }
+                            break;
+                        default:
+                            {   
+                                echo empty($_SESSION["visitor_type"]) ? "Not Logged in" : $_SESSION["visitor_type"];
+                                echo '
+                                <a class="nav-link" href="index.php?page=signup"><button class="nav-link btn btn-outline-secondary px-3">Signup</button></a>
+                                <a class="nav-link" href="index.php?page=signin"><button class="nav-link btn btn-primary text-white px-3">Signin</button></a>';
+                            }
+                            break;
+                    }
+                ?>
             </div>
         </div>
     </div>

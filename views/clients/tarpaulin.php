@@ -18,8 +18,8 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="quantity">Type</label>
-                        <select class="form-select" aria-label="Default select example">
-                            <option selected>-- Select Tarpauline Size --</option>
+                        <select class="form-select" aria-label="Default select example" required>
+                            <option value="" selected>-- Select Tarpauline Size --</option>
                             <option value="seta">6' x 4'</option>
                             <option value="seta">6' x 9'</option>
                             <option value="seta">12' x 8'</option>

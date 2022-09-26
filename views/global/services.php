@@ -79,5 +79,5 @@
 </section>
 
 <script>
-    const redirectToLogin = () => window.location.href = "http://localhost/pcsps/index.php?page=login";
+    const redirectToLogin = () => window.location.href = "http://localhost/pcsps/index.php?page=signin";
 </script>

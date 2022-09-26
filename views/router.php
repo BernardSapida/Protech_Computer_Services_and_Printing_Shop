@@ -38,6 +38,9 @@
         case "signup":
             include_once "visitors/signup.php";
             break;
+        case "signout":
+            include_once "global/signout.php";
+            break;
         default:
             include_once "global/home.php";
             break;

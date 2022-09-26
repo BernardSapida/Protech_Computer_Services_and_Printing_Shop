@@ -18,8 +18,8 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="quantity">Type</label>
-                        <select class="form-select" aria-label="Default select example">
-                            <option selected>-- Select ID Type --</option>
+                        <select class="form-select" aria-label="Default select example" required>
+                            <option value="" selected>-- Select ID Type --</option>
                             <option value="seta">Set A (2x2 4pcs)</option>
                             <option value="setb">Set B (1x1 8pcs)</option>
                             <option value="setc">Set C (Passport Size 5pcs)</option>

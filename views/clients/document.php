@@ -18,8 +18,8 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="quantity">Type</label>
-                        <select class="form-select" aria-label="Default select example">
-                            <option selected>-- Select Document Type --</option>
+                        <select class="form-select" aria-label="Default select example" required>
+                            <option value="" selected>-- Select Document Type --</option>
                             <option value="seta">Microsoft Word</option>
                             <option value="seta">Microsoft Excel</option>
                             <option value="seta">PDF</option>
