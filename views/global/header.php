@@ -41,5 +41,9 @@
         case "signin":
             echo '<title>PSCPS | Signin</title>';
             break;
+        default:
+            echo '<link rel="stylesheet" href="public/css/index.css">';
+            echo '<title>PSCPS | Home</title>';
+            break;
     }
 ?>

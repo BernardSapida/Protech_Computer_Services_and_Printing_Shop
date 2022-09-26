@@ -57,7 +57,6 @@
                             break;
                         default:
                             {   
-                                echo empty($_SESSION["visitor_type"]) ? "Not Logged in" : $_SESSION["visitor_type"];
                                 echo '
                                 <a class="nav-link" href="index.php?page=signup"><button class="nav-link btn btn-outline-secondary px-3">Signup</button></a>
                                 <a class="nav-link" href="index.php?page=signin"><button class="nav-link btn btn-primary text-white px-3">Signin</button></a>';

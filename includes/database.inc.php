@@ -34,49 +34,53 @@
         }
 
         function selectData($conn, $tableName, $data, $account) {
-            if(!empty($data) && !empty($account)) {
-                $stmt = $conn->prepare("SELECT * FROM `$tableName` WHERE `$data` = '$account'");
-                $stmt -> execute();
-                $result = $stmt->fetch(PDO::FETCH_ASSOC);
-            } else {
-                switch($tableName) {
-                    case "supplier_customer":
-                        {
-                            if(strcmp($data, "order status") == 0) {
-                                $stmt = $conn->prepare("SELECT * FROM `$tableName` WHERE `order status` = 'completed'");
-                            } else {
-                                $stmt = $conn->prepare("SELECT * FROM `$tableName` ORDER BY CASE 
-                                WHEN `order status` = 'Processing' THEN 1 
-                                WHEN `order status` = 'To ship' THEN 2 
-                                WHEN `order status` = 'To receive' THEN 3 
-                                WHEN `order status` = 'Completed' THEN 4 
-                                WHEN `order status` = 'Cancelled' THEN 5
-                                END");
-                            }
-                        }
-                        break;
-                    case "supplier_product":
-                        $supplierName = $data["supplierName"];
-                        $stmt = $conn->prepare("SELECT * FROM `$tableName` WHERE `supplier name` = '$supplierName' ORDER BY `box quantity` ASC");
-                        break;
-                    case "admin_product":
-                        $stmt = $conn->prepare("SELECT * FROM `$tableName` ORDER BY `quantity` ASC");
-                        break;
-                    case "admin_orders":
-                        if(strcmp($data, "all records") == 0) $stmt = $conn->prepare("SELECT * FROM `$tableName` ORDER BY CASE  WHEN `order status` = 'Processing' THEN 1  WHEN `order status` = 'To ship' THEN 2  WHEN `order status` = 'To receive' THEN 3  WHEN `order status` = 'Completed' THEN 4  WHEN `order status` = 'Cancelled' THEN 5 END");
-                        else $stmt = $conn->prepare("SELECT * FROM `$tableName` WHERE `order status` = 'completed'");
-                        break;
-                    case "accounts":
-                        $stmt = $conn->prepare("SELECT * FROM `$tableName` WHERE `type` = '$data'");
-                        break;
-                    default:
-                        $stmt = $conn->prepare("SELECT * FROM $tableName");
-                        break;
-                }
+            $stmt = $conn->prepare("SELECT * FROM `$tableName` WHERE `$data` = '$account'");
+            $stmt -> execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                $stmt -> execute();
-                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            }
+            // if(!empty($data) && !empty($account)) {
+            //     $stmt = $conn->prepare("SELECT * FROM `$tableName` WHERE `$data` = '$account'");
+            //     $stmt -> execute();
+            //     $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            // } else {
+            //     switch($tableName) {
+            //         case "supplier_customer":
+            //             {
+            //                 if(strcmp($data, "order status") == 0) {
+            //                     $stmt = $conn->prepare("SELECT * FROM `$tableName` WHERE `order status` = 'completed'");
+            //                 } else {
+            //                     $stmt = $conn->prepare("SELECT * FROM `$tableName` ORDER BY CASE 
+            //                     WHEN `order status` = 'Processing' THEN 1 
+            //                     WHEN `order status` = 'To ship' THEN 2 
+            //                     WHEN `order status` = 'To receive' THEN 3 
+            //                     WHEN `order status` = 'Completed' THEN 4 
+            //                     WHEN `order status` = 'Cancelled' THEN 5
+            //                     END");
+            //                 }
+            //             }
+            //             break;
+            //         case "supplier_product":
+            //             $supplierName = $data["supplierName"];
+            //             $stmt = $conn->prepare("SELECT * FROM `$tableName` WHERE `supplier name` = '$supplierName' ORDER BY `box quantity` ASC");
+            //             break;
+            //         case "admin_product":
+            //             $stmt = $conn->prepare("SELECT * FROM `$tableName` ORDER BY `quantity` ASC");
+            //             break;
+            //         case "admin_orders":
+            //             if(strcmp($data, "all records") == 0) $stmt = $conn->prepare("SELECT * FROM `$tableName` ORDER BY CASE  WHEN `order status` = 'Processing' THEN 1  WHEN `order status` = 'To ship' THEN 2  WHEN `order status` = 'To receive' THEN 3  WHEN `order status` = 'Completed' THEN 4  WHEN `order status` = 'Cancelled' THEN 5 END");
+            //             else $stmt = $conn->prepare("SELECT * FROM `$tableName` WHERE `order status` = 'completed'");
+            //             break;
+            //         case "accounts":
+            //             $stmt = $conn->prepare("SELECT * FROM `$tableName` WHERE `type` = '$data'");
+            //             break;
+            //         default:
+            //             $stmt = $conn->prepare("SELECT * FROM $tableName");
+            //             break;
+            //     }
+
+            //     $stmt -> execute();
+            //     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            // }
 
             return $result;
         }

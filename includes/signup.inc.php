@@ -5,6 +5,7 @@
 
     $db = new Database();
 
+
     if(count($_POST) > 0) {
         $uid = uniqid(rand(0,999));
         $image = "default.jpg";
@@ -12,9 +13,9 @@
         $lastname = $_POST["lastname"];
         $email = $_POST["email"];
         $address = $_POST["address"];
-        $contact_number = $_POST["contact_number"];
-        $gcashName = $_POST["gcash_name"];
-        $gcashNumber = $_POST["gcash_number"];
+        $contact_number = $_POST["contact"];
+        $gcashName = $_POST["gcashName"];
+        $gcashNumber = $_POST["gcashNumber"];
         $password = $_POST["password"];
         $encryptPassword = password_hash($password, PASSWORD_DEFAULT);
 

@@ -1,3 +1,5 @@
+<?php include_once "includes/signup.inc.php" ?>
+
 <section class="my-3">
     <div class="container py-5">
         <div class="row d-flex justify-content-center align-items-center">
@@ -10,7 +12,7 @@
                         </div>
                         <div class="col-md-6 col-lg-7 d-flex align-items-center">
                             <div class="card-body p-4 p-lg-5 text-black" id="app">
-                                <form class="needs-validation" @submit.prevent="submitForm" autocomplete="off" novalidate>
+                                <form class="needs-validation" @submit.prevent="submitForm" action="" method="POST" novalidate>
                                     <div class="d-flex align-items-center mb-3 pb-1">
                                         <img src="./public/images/logo/logo.png" alt="PCSPS Logo">&nbsp;&nbsp;&nbsp;
                                         <span class="h1 fw-bold mb-0">PCSPS</span>
@@ -27,6 +29,7 @@
                                                     'form-control'
                                                 ]"
                                                 v-model="firstname" 
+                                                name="firstname"
                                                 id="firstname" 
                                                 @keyup="validateFirstname" 
                                                 placeholder="Firstname"
@@ -44,6 +47,7 @@
                                                     'form-control'
                                                 ]"
                                                 v-model="lastname"
+                                                name="lastname"
                                                 id="lastname"
                                                 @keyup="validateLastname" 
                                                 placeholder="Lastname"
@@ -62,6 +66,7 @@
                                                 'form-control'
                                             ]" 
                                             v-model="email" 
+                                            name="email"
                                             id="email" 
                                             @keyup="validateEmail" 
                                             placeholder="Email address" 
@@ -79,6 +84,7 @@
                                                 'form-control'
                                             ]"
                                             v-model="address"
+                                            name="address"
                                             id="address"
                                             @keyup="validateAddress" 
                                             placeholder="Address"
@@ -97,6 +103,7 @@
                                                 'form-control'
                                             ]"
                                             v-model="contact"
+                                            name="contact"
                                             id="contact"
                                             @keyup="validateContact" 
                                             placeholder="Contact Number"
@@ -115,6 +122,7 @@
                                                     'form-control'
                                                 ]"
                                                 v-model="gcashName" 
+                                                name="gcashName"
                                                 id="gcashName" 
                                                 @keyup="validateGcashName" 
                                                 placeholder="Gcash Name"
@@ -132,6 +140,7 @@
                                                     'form-control'
                                                 ]"
                                                 v-model="gcashNumber" 
+                                                name="gcashNumber"
                                                 id="gcashNumber" 
                                                 @keyup="validateGcashNumber" 
                                                 placeholder="Gcash Number"
@@ -153,6 +162,7 @@
                                                     'form-control'
                                                 ]"
                                                 v-model="password"
+                                                name="password"
                                                 id="password"
                                                 @keyup="validatePassword" 
                                                 placeholder="Password"
@@ -170,6 +180,7 @@
                                                     'form-control'
                                                 ]"
                                                 v-model="confirmPassword"
+                                                name="confirmPassword"
                                                 id="confirmPassword"
                                                 @keyup="validateConfirmPassword" 
                                                 placeholder="Confirm password"
@@ -230,7 +241,7 @@
         },
         methods: {
             submitForm() {
-                const forms = document.querySelector('.needs-validation');
+                const form = document.querySelector('.needs-validation');
                 const inputs = document.querySelectorAll('input');
 
                 const { firstname, lastname, email, address, contact, gcashName, gcashNumber, password, confirmPassword, validFirstname, validLastname, validEmail, validAddress, validContact, validGcashName, validGcashNumber, validPassword, validConfirmPassword } = this;
@@ -248,28 +259,7 @@
                 this.validateConfirmPassword();
 
                 if(validFirstname && validLastname && validEmail && validAddress && validContact && validGcashName && validGcashNumber && validAddress && validPassword && validConfirmPassword) {
-                    console.log("VALID!")
-                    // $.ajax({
-                    //     type: "POST",
-                    //     url: "includes/signup.inc.php",
-                    //     dataType: "json",
-                    //     data: {
-                    //         firstname:  firstname,
-                    //         lastname: lastname,
-                    //         email: email,
-                    //         address: address,
-                    //         contact_number: contact_number,
-                    //         gcash_name: gcash_name,
-                    //         gcash_number: gcash_number,
-                    //         password: password
-                    //     },
-                    //     success: function(result, status, xhr) {
-                    //         console.table(result);
-                    //     },
-                    //     error(e) {
-                    //         console.log(e);
-                    //     }
-                    // });
+                    form.submit();
                 }
 
             },

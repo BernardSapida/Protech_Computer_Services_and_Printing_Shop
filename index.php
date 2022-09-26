@@ -10,6 +10,7 @@
 
     <script src="public/js/bootstrap.bundle.min.js" defer></script>
     <script src="public/js/popper.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <?php include_once "views/global/header.php"; ?>
 </head>
