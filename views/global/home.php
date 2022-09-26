@@ -5,13 +5,10 @@
                 <img src="./public/images/carousel_images/id.jpg" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-                <img src="./public/images/carousel_images/mug.jpg" class="d-block w-100" alt="...">
+                <img src="./public/images/carousel_images/document.jpeg" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
                 <img src="./public/images/carousel_images/tarp.jpg" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="./public/images/carousel_images/tshirt.jpg" class="d-block w-100" alt="...">
             </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
@@ -44,77 +41,32 @@
     <div class="container text-center my-5 py-5 border-top border-bottom">
         <h1>Our Services</h1>
     </div>
-    <div class="d-flex flex-wrap justify-content-around">
-        <div class="col-md-4 col-sm-12 card m-2" style="width: 18rem;">
-            <img src="./public/images/selling_products/whiteShirtFront.jpg" height="250px" class="card-img-top" alt="White Shirt">
+    <div class="d-flex flex-wrap justify-content-center gap-3">
+        <div class="card m-2" style="width: 18rem;">
+            <img src="./public/images/products/id.jpg" height="250px" class="card-img-top" alt="White Shirt">
             <div class="card-body">
-                <h5 class="card-title">White Shirt</h5>
+                <h5 class="card-title">ID Picture</h5>
                 <p class="card-text text-secondary">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 <p class="card-text">Php 250.00</p>
-                <a href="#" class="btn btn-primary" onclick="redirectToLogin()">Buy now</a>
+                <a href="#" class="btn btn-primary" onclick="redirectToLogin()"><i class="fa-solid fa-cart-shopping"></i> Buy now</a>
             </div>
         </div>
-        <div class="col-md-4 col-sm-12 card m-2" style="width: 18rem;">
-            <img src="./public/images/selling_products/BlackPinkFront.jpg" height="250px" class="card-img-top" alt="White Shirt">
+        <div class="card m-2" style="width: 18rem;">
+            <img src="./public/images/products/document.jpeg" height="250px" class="card-img-top" alt="White Shirt">
             <div class="card-body">
-                <h5 class="card-title">Black Pink Shirt</h5>
+                <h5 class="card-title">Documents</h5>
                 <p class="card-text text-secondary">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 <p class="card-text">Php 250.00</p>
-                <a href="#" class="btn btn-primary" onclick="redirectToLogin()">Buy now</a>
+                <a href="#" class="btn btn-primary" onclick="redirectToLogin()"><i class="fa-solid fa-cart-shopping"></i> Buy now</a>
             </div>
         </div>
-        <div class="col-md-4 col-sm-12 card m-2" style="width: 18rem;">
-            <img src="./public/images/selling_products/BlackPinkLongFront.jpg" height="250px" class="card-img-top" alt="White Shirt">
+        <div class="card m-2" style="width: 18rem;">
+            <img src="./public/images/products/tarpaulin.jpeg" height="250px" class="card-img-top" alt="White Shirt">
             <div class="card-body">
-                <h5 class="card-title">Black Pink Sweater</h5>
+                <h5 class="card-title">Tarpaulin</h5>
                 <p class="card-text text-secondary">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 <p class="card-text">Php 250.00</p>
-                <a href="#" class="btn btn-primary" onclick="redirectToLogin()">Buy now</a>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-12 card m-2" style="width: 18rem;">
-            <img src="./public/images/selling_products/skShirtFront.jpg" height="250px" class="card-img-top" alt="White Shirt">
-            <div class="card-body">
-                <h5 class="card-title">SK Polo-Shirt</h5>
-                <p class="card-text text-secondary">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <p class="card-text">Php 350.00</p>
-                <a href="#" class="btn btn-primary" onclick="redirectToLogin()">Buy now</a>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-12 card m-2" style="width: 18rem;">
-            <img src="./public/images/selling_products/sportShirtFront.jpg" height="250px" class="card-img-top" alt="White Shirt">
-            <div class="card-body">
-                <h5 class="card-title">Sport Shirt</h5>
-                <p class="card-text text-secondary">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <p class="card-text">Php 350.00</p>
-                <a href="#" class="btn btn-primary" onclick="redirectToLogin()">Buy now</a>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-12 card m-2" style="width: 18rem;">
-            <img src="./public/images/selling_products/mug_primavera.png" height="250px" class="card-img-top" alt="White Shirt">
-            <div class="card-body">
-                <h5 class="card-title">Primavera Mug</h5>
-                <p class="card-text text-secondary">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <p class="card-text">Php 300.00</p>
-                <a href="#" class="btn btn-primary" onclick="redirectToLogin()">Buy now</a>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-12 card m-2" style="width: 18rem;">
-            <img src="./public/images/selling_products/mug_plant.jpg" height="250px" class="card-img-top" alt="White Shirt">
-            <div class="card-body">
-                <h5 class="card-title">Plant Mug</h5>
-                <p class="card-text text-secondary">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <p class="card-text">Php 300.00</p>
-                <a href="#" class="btn btn-primary" onclick="redirectToLogin()">Buy now</a>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-12 card m-2" style="width: 18rem;">
-            <img src="./public/images/selling_products/mug_goodday.jpg" height="250px" class="card-img-top" alt="White Shirt">
-            <div class="card-body">
-                <h5 class="card-title">Good Day Mug</h5>
-                <p class="card-text text-secondary">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <p class="card-text">Php 300.00</p>
-                <a href="#" class="btn btn-primary" onclick="redirectToLogin()">Buy now</a>
+                <a href="#" class="btn btn-primary" onclick="redirectToLogin()"><i class="fa-solid fa-cart-shopping"></i> Buy now</a>
             </div>
         </div>
     </div>

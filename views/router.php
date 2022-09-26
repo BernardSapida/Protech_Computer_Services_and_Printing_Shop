@@ -1,12 +1,16 @@
 <?php 
     $current_page = empty($_GET["page"]) ? "" : $_GET["page"];
+    $visitor = empty($_SESSION["type"]) ? "" : $_SESSION["type"];
 
     switch($current_page) {
         case "home":
             include_once "global/home.php";
             break;
         case "services":
-            include_once "global/services.php";
+            {   
+                if(strcmp($visitor, "client") == 0) include_once "clients/services.php";
+                else include_once "global/services.php";
+            }
             break;
         case "addtocart":
             include_once "clients/addtocart.php";
