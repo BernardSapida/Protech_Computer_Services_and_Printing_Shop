@@ -264,7 +264,8 @@
                         title: "Account successfully created!",
                         text: "You can now use your account to sign in",
                         icon: "success",
-                        button: "Okay",
+                        button: false,
+                        timer: 2000
                     }).then((okay) => form.submit());
                 }
 

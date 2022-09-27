@@ -65,20 +65,16 @@
                     <hr>
                     <div class="d-flex justify-content-between">
                         <p><strong>Cart Total</strong></p>
-                        <p>Php 0.00</p>
-                    </div>
-                    <div class="d-flex justify-content-between">
-                        <p><strong>Delivery Fee</strong></p>
-                        <p>Php 0.00</p>
+                        <p>Php {{cart_total}}</p>
                     </div>
                     <div class="d-flex justify-content-between">
                         <p><strong>Discount</strong></p>
-                        <p>Php 0.00</p>
+                        <p>Php {{0}}</p>
                     </div>
                     <hr>
                     <div class="d-flex justify-content-between">
                         <p><strong>Total</strong></p>
-                        <p>Php 0.00</p>
+                        <p>Php {{total}}</p>
                     </div>
                     <div class="d-flex mt-3">
                         <button type="submit" class="btn btn-primary ms-auto"><i class="fa-solid fa-cart-shopping"></i>&nbsp; Checkout</button>
@@ -102,7 +98,8 @@
                 lastname: "",
                 email: "",
                 address: "",
-                password: "",
+                cart_total: 0,
+                total: 0,
                 confirmPassword: "",
                 cart_items: []
             }

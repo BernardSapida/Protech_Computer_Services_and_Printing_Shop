@@ -109,10 +109,13 @@
                     }
                     else if(response.data == "Authorized") {
                         swal({
-                            title: "Successfully signed in!",
+                            title: "Successfully!",
+                            text: "You are now signed in to your account",
                             icon: "success",
-                            button: "Okay",
+                            button: false,
+                            timer: 2000
                         }).then((okay) => window.location.href = "index.php?page=services");
+                        
                     }
                 }
             },

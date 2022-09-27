@@ -172,7 +172,8 @@
                         title: "Successfully added to cart!",
                         text: "View your items in cart",
                         icon: "success",
-                        button: "Okay",
+                        button: false,
+                        timer: 2000
                     }).then((okay) => FORM.submit());
                 }
             },

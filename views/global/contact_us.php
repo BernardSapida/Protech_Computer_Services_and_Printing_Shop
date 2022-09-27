@@ -123,7 +123,8 @@
                         title: "The form was submitted!",
                         text: "Thank you for sending us a message!",
                         icon: "success",
-                        button: "Close",
+                        button: false,
+                        timer: 2000
                     }).then(okay => form.submit());
                 }
             },
@@ -184,11 +185,11 @@
                 const { message } = this;
                 
                 if(this.isSubmitted) {
-                    if(message.length == 0) {
+                    if(message.trim().length == 0) {
                         this.errMessage = "Message is required";
                         this.validMessage = false;
                     }
-                    else if(message.length < 10) {
+                    else if(message.trim().length < 10) {
                         this.errMessage = "Message is too short";
                         this.validMessage = false;
                     }
