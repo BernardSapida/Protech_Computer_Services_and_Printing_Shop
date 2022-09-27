@@ -1,7 +1,7 @@
 <section class="my-5" id="app">
     <div class="container mb-5">
         <h2>Cart</h2>
-        <p class="text-secondary">You currently have 0 item(s) in your cart</p>
+        <p class="text-secondary">You currently have {{cart_items.length}} item(s) in your cart</p>
         <div class="table-responsive">
             <table class="table table-hover">
                 <thead class="table-dark">
@@ -11,12 +11,21 @@
                         <th>Product</th>
                         <th>Quantity</th>
                         <th>Price</th>
-                        <th>Type</th>
+                        <th>Detail</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr v-for="(items, index) in cart_items" :id="index" :key="index">
+                        <td>{{+index+1}}</td>
+                        <td>{{items["date"]}}</td>
+                        <td>{{items["product"]}}</td>
+                        <td>{{items["quantity"]}}</td>
+                        <td>{{items["price"]}}</td>
+                        <td>{{items["size"]}}</td>
+                        <td><button type="button" class="btn btn-danger" @click="removeRow(index)">Remove</button></td>
+                    </tr>
+                    <tr v-if="cart_items.length == 0">
                         <td class="text-center" colspan="7">Empty</td>
                     </tr>
                 </tbody>
@@ -84,33 +93,51 @@
     const { createApp } = Vue
 
     createApp({
-        mounted() {
-            this.submitForm();
+        created() {
+            this.getCartItems();
         },
         data() {
             return {
                 firstname: "",
                 lastname: "",
                 email: "",
+                address: "",
                 password: "",
                 confirmPassword: "",
+                cart_items: []
             }
         },
         methods: {
             submitForm() {
-                const forms = document.querySelectorAll('.needs-validation')
+                const FORM = document.querySelector('.needs-validation')
+                FORM.classList.add('was-validated')
+            },
+            removeRow(index) {
+                swal("Are you sure you want to remove it?", {
+                    dangerMode: true,
+                    buttons: ["Cancel", "Remove"],
+                }).then(async(remove) => {
+                    if(remove) {
+                        let response = await axios({
+                            method: 'POST',
+                            url: 'includes/removeCartItem.inc.php',
+                            data: {
+                                index: index
+                            }
+                        });
 
-                Array.from(forms).forEach(form => {
-                    form.addEventListener('submit', event => {
-                        if (!form.checkValidity()) {
-                            event.preventDefault()
-                            event.stopPropagation()
-                        }
+                        this.cart_items = response.data;
+                    }
+                });
+            },
+            async getCartItems() {
+                let response = await axios({
+                    method: 'GET',
+                    url: 'includes/cart.inc.php'
+                });
 
-                        form.classList.add('was-validated')
-                    }, false)
-                })
-            }
+                this.cart_items = response.data;
+            },
         }
     }).mount('#app')
 </script>

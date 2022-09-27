@@ -1,6 +1,6 @@
 <?php
     require_once "database.inc.php";
-
+ 
     error_reporting(E_ERROR | E_PARSE);
 
     session_start();
@@ -9,7 +9,7 @@
 
     $data = json_decode(file_get_contents("php://input"), true);
 
-    if(count($data) > 0) {
+    if(!empty($data)) {
         $email = $data["email"];
         $password = $data["password"];
         $result = $db -> connect("select", "accounts", 'email', $email);

@@ -1,3 +1,5 @@
+<?php include_once "includes/id.inc.php" ?>
+
 <section class="my-5">
     <div class="container">
         <div class="d-flex justify-content-center gap-5">
@@ -5,10 +7,10 @@
                 <img src="public/images/products/id.jpg" width="500px" alt="ID">
             </div>
             <div id="app">
-                <form class="needs-validation" @submit.prevent="submitForm" novalidate>
+                <form class="needs-validation" @submit.prevent="submitForm" action="" method="POST" novalidate>
                     <div class="mb-3">
                         <label class="form-label" for="product">Product Name</label>
-                        <input type="text" :class="['form-control']" v-model="product" id="product" placeholder="Product Name" required/>
+                        <input type="text" :class="['form-control']" v-model="product" id="product" placeholder="Product Name" style="pointer-events: none;" required/>
                         <div class="invalid-feedback">Product name is required</div>
                     </div>
                     <div class="mb-3">
@@ -29,12 +31,12 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="price">Price</label>
-                        <input type="number" :class="['form-control']" v-model="price" id="price" placeholder="Price" required/>
+                        <input type="number" :class="['form-control']" v-model="price" id="price" placeholder="Price" style="pointer-events: none;" required/>
                         <div class="invalid-feedback">Price is required</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="picture">ID Picture</label>
-                        <input type="file" :class="['form-control']" v-model="picture" id="picture" placeholder="Picture" required/>
+                        <input type="file" :class="['form-control']" @change="getPictureName" id="picture" placeholder="Picture" required/>
                         <div class="invalid-feedback">Picture is required</div>
                     </div>
                     <div class="d-grid">
@@ -50,29 +52,21 @@
     const { createApp } = Vue
 
     createApp({
-        mounted() {
-            this.submitForm();
-        },
         data() {
             return {
                 product: "ID",
+                quantity: 0,
                 price: 100,
+                picture: ""
             }
         },
         methods: {
             submitForm() {
-                const forms = document.querySelectorAll('.needs-validation')
-
-                Array.from(forms).forEach(form => {
-                    form.addEventListener('submit', event => {
-                        if (!form.checkValidity()) {
-                            event.preventDefault()
-                            event.stopPropagation()
-                        }
-
-                        form.classList.add('was-validated')
-                    }, false)
-                })
+                const form = document.querySelector('.needs-validation')
+                form.classList.add('was-validated')
+            },
+            getPictureName() {
+                console.log(document.getElementById('picture').value);
             }
         }
     }).mount('#app')
