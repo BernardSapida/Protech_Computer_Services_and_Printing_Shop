@@ -8,16 +8,13 @@
         $image_new_name = "";
         $image_external = pathinfo($image_name, PATHINFO_EXTENSION);
         $image_external_lowercase = strtolower($image_external);
-        $allowed_externals = array("jpg", "jpeg", "png");
         
-        if(in_array($image_external_lowercase, $allowed_externals)){
-            $image_new_name = uniqid("IMAGE-", true) . '.' . $image_external_lowercase;
-            $image_upload_path = 'public/documents/' . $image_new_name;
-            move_uploaded_file($image_tmp, $image_upload_path);
+        $image_new_name = uniqid("IMAGE-", true) . '.' . $image_external_lowercase;
+        $image_upload_path = 'public/documents/' . $image_new_name;
+        move_uploaded_file($image_tmp, $image_upload_path);
 
-            $image = $image_new_name;
-            $_SESSION["image"] = $image;
-        }
+        $image = $image_new_name;
+        $_SESSION["image"] = $image;
 
         $_POST["date"] = date("F j, Y h:i:s A");
         $_POST["file"] = $image_new_name;

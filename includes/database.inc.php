@@ -176,13 +176,11 @@
                                 $lastname = $data['lastname'];
                                 $email = $data['email'];
                                 $address = $data['address'];
-                                $storeName = $data['storeName'];
-                                $contact = $data['contact no.'];
-                                $paymentName = $data['paymentName'];
-                                $paymentNumber = $data['paymentNumber'];
-                                $type = $data['type'];
+                                $contact = $data['contact'];
+                                $gcashName = $data['gcashName'];
+                                $gcashNumber = $data['gcashNumber'];
                                 
-                                $stmt = $conn->prepare("UPDATE `$tableName` SET `uid` = '$uid', `image` = '$image', `firstname` = '$firstname', `lastname` = '$lastname', `email` = '$email', `address` = '$address', `store name` = '$storeName', `contact no.` = '$contact', `payment name` = '$paymentName', `payment number` = '$paymentNumber', `type` = '$type' WHERE `uid` = '$uid'");
+                                $stmt = $conn->prepare("UPDATE `$tableName` SET `uid` = '$uid', `image` = '$image', `firstname` = '$firstname', `lastname` = '$lastname', `email` = '$email', `address` = '$address', `contact_number` = '$contact', `gcash_name` = '$gcashName', `gcash_number` = '$gcashNumber' WHERE `uid` = '$uid'");
                                 break;
                             case "password":
                                 $uid = $data['uid'];
@@ -190,85 +188,75 @@
 
                                 $stmt = $conn->prepare("UPDATE `$tableName` SET `password` = '$password' WHERE uid = '$uid'");
                                 break;
-                            case "notification":
-                                $storeName = $data['supplierName'];
-                                $result = $this -> selectData($conn, $tableName, "store name", $storeName);
-                                $notificationNumber = 0;
-
-                                if($data['notificationNumber'] != 0) {
-                                    $notificationNumber = $data['notificationNumber'] + $result['notification number'];
-                                }
-                                
-                                $stmt = $conn->prepare("UPDATE `$tableName` SET `notification number` = '$notificationNumber' WHERE `store name` = '$storeName'");
                         }
                         
                         $stmt->execute();
                         
-                        return true;
+                        return "Success";
                     };
                     break;
-                case "admin_orders":
-                    {
-                        $transactionNo = $data['transactionNo'];
-                        $orderStatus = $data['orderStatus'];
+                // case "admin_orders":
+                //     {
+                //         $transactionNo = $data['transactionNo'];
+                //         $orderStatus = $data['orderStatus'];
 
-                        $stmt = $conn->prepare("UPDATE `$tableName` SET `order status` = '$orderStatus' WHERE `transaction no.` = '$transactionNo'");
-                        $stmt->execute();
-                    };
-                    break;
-                case "admin_product":
-                    {
-                        $productCode = $data['productCode'];
-                        if(!empty($account)) {
-                            $status = $data['status'];
+                //         $stmt = $conn->prepare("UPDATE `$tableName` SET `order status` = '$orderStatus' WHERE `transaction no.` = '$transactionNo'");
+                //         $stmt->execute();
+                //     };
+                //     break;
+                // case "admin_product":
+                //     {
+                //         $productCode = $data['productCode'];
+                //         if(!empty($account)) {
+                //             $status = $data['status'];
 
-                            $stmt = $conn->prepare("UPDATE `$tableName` SET `status` = '$status' WHERE `product code` = '$productCode'");
-                            $stmt->execute();
-                        } else {
-                            $productName = $data['productName'];
-                            $category = $data['category'];
-                            $quantity = $data['quantity'];
-                            $price = $data['price'];
+                //             $stmt = $conn->prepare("UPDATE `$tableName` SET `status` = '$status' WHERE `product code` = '$productCode'");
+                //             $stmt->execute();
+                //         } else {
+                //             $productName = $data['productName'];
+                //             $category = $data['category'];
+                //             $quantity = $data['quantity'];
+                //             $price = $data['price'];
 
-                            $stmt = $conn->prepare("UPDATE `$tableName` SET `product name` = '$productName', `category` = '$category', `price` = '$price', `quantity` = '$quantity' WHERE `product code` = '$productCode'");
-                            $stmt->execute();
-                        }
-                    };
-                    break;
-                case "supplier_customer":
-                    {
-                        $transactionNo = $data['transactionNo'];
-                        $orderStatus = $data['orderStatus'];
+                //             $stmt = $conn->prepare("UPDATE `$tableName` SET `product name` = '$productName', `category` = '$category', `price` = '$price', `quantity` = '$quantity' WHERE `product code` = '$productCode'");
+                //             $stmt->execute();
+                //         }
+                //     };
+                //     break;
+                // case "supplier_customer":
+                //     {
+                //         $transactionNo = $data['transactionNo'];
+                //         $orderStatus = $data['orderStatus'];
 
-                        $stmt = $conn->prepare("UPDATE `$tableName` SET `order status` = '$orderStatus' WHERE `transaction no.` = '$transactionNo'");
-                        $stmt->execute();
-                    };
-                    break;
-                case "supplier_product":
-                    {
-                        if(!empty($account)) {
-                            $productCode = $data['productCode'];
-                            $status = $data['status'];
+                //         $stmt = $conn->prepare("UPDATE `$tableName` SET `order status` = '$orderStatus' WHERE `transaction no.` = '$transactionNo'");
+                //         $stmt->execute();
+                //     };
+                //     break;
+                // case "supplier_product":
+                //     {
+                //         if(!empty($account)) {
+                //             $productCode = $data['productCode'];
+                //             $status = $data['status'];
 
-                            $stmt = $conn->prepare("UPDATE `$tableName` SET `status` = '$status' WHERE `product code` = '$productCode'");
-                            $stmt->execute();
+                //             $stmt = $conn->prepare("UPDATE `$tableName` SET `status` = '$status' WHERE `product code` = '$productCode'");
+                //             $stmt->execute();
 
-                            return "SUCCESS";
-                        } else {
-                            $productCode = $data['productCode'];
-                            $productName = $data['productName'];
-                            $category = $data['category'];
-                            $boxQuantity = $data['boxQuantity'];
-                            $pcsPerBox = $data['pcsPerBox'];
-                            $pricePerBox = $data['pricePerBox'];
-                            $shippingFee = $data['shippingFee'];
-                            $discount = $data['discount'];
+                //             return "SUCCESS";
+                //         } else {
+                //             $productCode = $data['productCode'];
+                //             $productName = $data['productName'];
+                //             $category = $data['category'];
+                //             $boxQuantity = $data['boxQuantity'];
+                //             $pcsPerBox = $data['pcsPerBox'];
+                //             $pricePerBox = $data['pricePerBox'];
+                //             $shippingFee = $data['shippingFee'];
+                //             $discount = $data['discount'];
 
-                            $stmt = $conn->prepare("UPDATE `$tableName` SET `product code` = '$productCode', `product name` = '$productName', `category` = '$category', `box quantity` = '$boxQuantity', `pcs per box` = '$pcsPerBox', `price per box` = '$pricePerBox', `shipping fee` = '$shippingFee', `discount` = '$discount' WHERE `product code` = '$productCode'");
-                            $stmt->execute();
-                        }
-                    };
-                    break;
+                //             $stmt = $conn->prepare("UPDATE `$tableName` SET `product code` = '$productCode', `product name` = '$productName', `category` = '$category', `box quantity` = '$boxQuantity', `pcs per box` = '$pcsPerBox', `price per box` = '$pricePerBox', `shipping fee` = '$shippingFee', `discount` = '$discount' WHERE `product code` = '$productCode'");
+                //             $stmt->execute();
+                //         }
+                //     };
+                //     break;
                 }
         }
 

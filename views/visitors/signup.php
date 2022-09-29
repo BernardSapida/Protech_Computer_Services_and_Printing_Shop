@@ -57,7 +57,7 @@
                                         </div>
                                     </div>
                                     <div class="mb-3">
-                                        <label class="form-label" for="form2Example17">Email address</label>
+                                        <label class="form-label" for="email">Email address</label>
                                         <input 
                                             type="email" 
                                             :class="[
@@ -148,8 +148,6 @@
                                             <div class="invalid-feedback" v-if="!validGcashNumber">{{errGcashNumber}}</div>
                                         </div>
                                     </div>
-
-
                                     <div class="row">
                                         <div class="col-md-6 col-sm-12 mb-4">
                                             <label class="form-label" for="password">Password</label>
