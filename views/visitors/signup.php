@@ -92,7 +92,6 @@
                                         />
                                         <div class="invalid-feedback" v-if="!validAddress">{{errAddress}}</div>
                                     </div>
-
                                     <div class="mb-3">
                                         <label class="form-label" for="contact">Contact Number</label>
                                         <input 
@@ -268,7 +267,6 @@
                         timer: 2000
                     }).then((okay) => form.submit());
                 }
-
             },
             validateFirstname() {
                 const { firstname } = this;
@@ -302,8 +300,8 @@
                         this.validLastname = false;
                     }
                     else if(!/^[A-z]+$/.test(lastname)) {
-                        this.errFirstname = "First name is invalid";
-                        this.validFirstname = false;
+                        this.errLastname = "First name is invalid";
+                        this.validLastname = false;
                     }
                     else this.validLastname = true;
                 }
@@ -361,6 +359,10 @@
                         this.validGcashName = false;
                     }
                     else if(gcashName.length < 5) {
+                        this.errGcashName = "Gcash name is too short";
+                        this.validGcashName = false;
+                    }
+                    else if(!/^[A-z]+$/.test(gcashName)) {
                         this.errGcashName = "Gcash name is invalid";
                         this.validGcashName = false;
                     }

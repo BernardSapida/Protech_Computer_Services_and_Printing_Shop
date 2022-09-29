@@ -116,6 +116,33 @@
                         $stmt->execute();
                     };
                     break;
+                case "client_carts":
+                    {
+                        $name = $data["name"];
+                        $email = $data["email"];
+                        $address = $data["address"];
+                        $gcashName = $data["gcashName"];
+                        $gcashNumber = $data["gcashNumber"];
+                        $referenceNo = $data["referenceNo"];
+                        $orderNumber = uniqid(rand(0,999));
+                        $transactionNumber = uniqid(rand(0,999));
+                        $items = $data["items"];
+                        $total = $data["total"];
+
+                        $stmt = $conn->prepare("INSERT INTO `$tableName` (`name`, `email`, `address`, `gcash_name`, `gcash_number`, `reference_no`, `order_number`, `transaction_number`, `items`, `total`) VALUES (:name, :email, :address, :gcashName, :gcashNumber, :referenceNo, :orderNumber, :transactionNumber, :items, :total)");
+                        $stmt -> bindParam(':name', $name);
+                        $stmt -> bindParam(':email', $email);
+                        $stmt -> bindParam(':address', $address);
+                        $stmt -> bindParam(':gcashName', $gcashName);
+                        $stmt -> bindParam(':gcashNumber', $gcashNumber);
+                        $stmt -> bindParam(':referenceNo', $referenceNo);
+                        $stmt -> bindParam(':orderNumber', $orderNumber);
+                        $stmt -> bindParam(':transactionNumber', $transactionNumber);
+                        $stmt -> bindParam(':items', $items);
+                        $stmt -> bindParam(':total', $total);
+                        $stmt->execute();
+                    }
+                    break;
                 case "client_concerns":
                     {
                         $firstname = $data['firstname'];

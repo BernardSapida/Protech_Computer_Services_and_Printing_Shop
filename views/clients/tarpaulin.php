@@ -7,7 +7,7 @@
                 <img src="public/images/products/tarpaulin.jpeg" width="500px" alt="ID">
             </div>
             <div id="app">
-                <form class="needs-validation" @submit.prevent="submitForm" action="" method="POST"  enctype="multipart/form-data" novalidate>
+                <form class="needs-validation" @submit.prevent="submitForm" action="" method="POST" enctype="multipart/form-data" novalidate>
                     <div class="mb-3">
                         <label class="form-label" for="product">Product Name</label>
                         <input 
@@ -55,37 +55,11 @@
                             id="size"
                             v-model="size"
                             @change="validateSize"
-                            aria-label="Default select example" 
+                            aria-label="ID Size" 
                             required
                         >
                             <option value="" selected>-- Select Tarpauline Size --</option>
-                            <option value="5 x 7">5' x 7'</option>
-                            <option value="6 x 8">6' x 8'</option>
-                            <option value="7 x 9">7 x 9</option>
-                            <option value="8 x 10">8' x 10'</option>
-                            <option value="8 x 12">8' x 12'</option>
-                            <option value="8 x 14">8' x 14'</option>
-                            <option value="9 x 12">9' x 12'</option>
-                            <option value="10 x 12">10' x 12'</option>
-                            <option value="10 x 14">10' x 14'</option>
-                            <option value="10 x 16">10' x 16'</option>
-                            <option value="10 x 18">10' x 18'</option>
-                            <option value="10 x 20">10' x 20'</option>
-                            <option value="12 x 14">12' x 14'</option>
-                            <option value="12 x 16">12' x 16'</option>
-                            <option value="12 x 18">12' x 18'</option>
-                            <option value="12 x 20">12' x 20'</option>
-                            <option value="12 x 24">12' x 24'</option>
-                            <option value="14 x 16">14' x 16'</option>
-                            <option value="14 x 18">14' x 18'</option>
-                            <option value="14 x 20">14' x 20'</option>
-                            <option value="15 x 20">15' x 20'</option>
-                            <option value="16 x 20">16' x 20'</option>
-                            <option value="16 x 24">16' x 24'</option>
-                            <option value="18 x 20">18' x 20'</option>
-                            <option value="20 x 20">20' x 20'</option>
-                            <option value="20 x 24">20' x 24'</option>
-                            <option value="20 x 30">20' x 30'</option>
+                            <option v-for="(size, index) in Object.keys(size_list)" :key="index" :value="size" >{{size}}</option>
                         </select>
                         <div class="invalid-feedback" v-if="!validSize">{{errSize}}</div>
                     </div>
@@ -109,7 +83,8 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="picture">Tarpaulin Picture</label>
-                        <input type="file" 
+                        <input 
+                            type="file" 
                             :class="[
                                 {'is-valid': validPicture},
                                 {'is-invalid': !validPicture && isSubmitted},
@@ -138,7 +113,36 @@
     createApp({
         data() {
             return {
-                product: "ID",
+                size_list: {
+                    "Size: 5' x 7'": 595,
+                    "Size: 6' x 8'": 816,
+                    "Size: 7' x 9'": 1071,
+                    "Size: 8' x 10'": 1360,
+                    "Size: 8' x 12'": 1632,
+                    "Size: 8' x 14'": 1904,
+                    "Size: 9' x 12'": 1336,
+                    "Size: 10' x 12'": 2040,
+                    "Size: 10' x 14'": 2380,
+                    "Size: 10' x 16'": 2720,
+                    "Size: 10' x 18'": 3060,
+                    "Size: 10' x 20'": 3400,
+                    "Size: 12' x 14'": 2856,
+                    "Size: 12' x 16'": 3264,
+                    "Size: 12' x 18'": 3672,
+                    "Size: 12' x 20'": 4080,
+                    "Size: 12' x 24'": 4896,
+                    "Size: 14' x 16'": 3808,
+                    "Size: 14' x 18'": 4284,
+                    "Size: 14' x 20'": 4760,
+                    "Size: 15' x 20'": 5100,
+                    "Size: 16' x 20'": 5440,
+                    "Size: 16' x 24'": 6528,
+                    "Size: 18' x 20'": 6120,
+                    "Size: 20' x 20'": 6800,
+                    "Size: 20' x 24'": 8160,
+                    "Size: 20' x 30'": 10200,
+                },
+                product: "Tarpaulin",
                 quantity: 0,
                 size: "",
                 price: 0,
@@ -219,7 +223,7 @@
                     const VALID_EXTERNAL = ["jpg", "jpeg", "png"];
 
                     if(VALID_EXTERNAL.indexOf(FILE_EXTERNAL) == -1) {
-                        this.errPicture = "File external should be jpg, jpeg, or png";
+                        this.errPicture = "File external should be .jpg, .jpeg, or .png";
                         this.validPicture = false;
                         return;
                     }
@@ -228,39 +232,10 @@
                 }
             },
             getPrice() {
-                const { quantity, size } = this;
-                const PRICE_LIST = {
-                    "5 x 7": 595,
-                    "6 x 8": 816,
-                    "7 x 9": 1071,
-                    "8 x 10": 1360,
-                    "8 x 12": 1632,
-                    "8 x 14": 1904,
-                    "9 x 12": 1336,
-                    "10 x 12": 2040,
-                    "10 x 14": 2380,
-                    "10 x 16": 2720,
-                    "10 x 18": 3060,
-                    "10 x 20": 3400,
-                    "12 x 14": 2856,
-                    "12 x 16": 3264,
-                    "12 x 18": 3672,
-                    "12 x 20": 4080,
-                    "12 x 24": 4896,
-                    "14 x 16": 3808,
-                    "14 x 18": 4284,
-                    "14 x 20": 4760,
-                    "15 x 20": 5100,
-                    "16 x 20": 5440,
-                    "16 x 24": 6528,
-                    "18 x 20": 6120,
-                    "20 x 20": 6800,
-                    "20 x 24": 8160,
-                    "20 x 30": 10200,
-                }
+                const { size_list, quantity, size } = this;
 
                 if(quantity > 0 && size != "") {
-                    this.price = PRICE_LIST[size] * quantity;
+                    this.price = size_list[size] * quantity;
                     this.validPrice = true;
                 } else this.price = 0;
             }

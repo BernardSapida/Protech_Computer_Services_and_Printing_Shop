@@ -1,41 +1,29 @@
 <?php
-    require_once "database.inc.php";
-
-    error_reporting(E_ERROR | E_PARSE);
-
-    $db = new Database();
-
     if(!empty($_POST)) {
-        $uid = uniqid(rand(0,999));
-        $image = "default.jpg";
-        $firstname = $_POST["firstname"];
-        $lastname = $_POST["lastname"];
-        $email = $_POST["email"];
-        $address = $_POST["address"];
-        $contact_number = $_POST["contact"];
-        $gcashName = $_POST["gcashName"];
-        $gcashNumber = $_POST["gcashNumber"];
-        $password = $_POST["password"];
-        $encryptPassword = password_hash($password, PASSWORD_DEFAULT);
+        $image_name = $_FILES["picture"]["name"];
+        $image_size = $_FILES["picture"]["size"];
+        $image_tmp = $_FILES["picture"]["tmp_name"];
+        $image_err = $_FILES["picture"]["error"];
 
-        $db -> connect(
-            "insert", 
-            "accounts", 
-            array(
-                "uid" => $uid, 
-                "image" => $image, 
-                "firstname" => $firstname,
-                "lastname" => $lastname,
-                "email" => $email,
-                "address" => $address,
-                "contact_number" => $contact_number,
-                "gcashName" => $gcashName,
-                "gcashNumber" => $gcashNumber,
-                "password" => $encryptPassword,
-                "type" => "client",
-            )
-        );
+        $image_new_name = "";
+        $image_external = pathinfo($image_name, PATHINFO_EXTENSION);
+        $image_external_lowercase = strtolower($image_external);
+        $allowed_externals = array("jpg", "jpeg", "png");
+        
+        if(in_array($image_external_lowercase, $allowed_externals)){
+            $image_new_name = uniqid("IMAGE-", true) . '.' . $image_external_lowercase;
+            $image_upload_path = 'public/documents/' . $image_new_name;
+            move_uploaded_file($image_tmp, $image_upload_path);
 
-        header("Location: index.php?page=signin");
+            $image = $image_new_name;
+            $_SESSION["image"] = $image;
+        }
+
+        $_POST["date"] = date("F j, Y h:i:s A");
+        $_POST["file"] = $image_new_name;
+
+        array_push($_SESSION["cart"], $_POST);
+
+        header("Location: index.php?page=cart");
     }
 ?>

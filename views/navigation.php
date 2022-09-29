@@ -9,6 +9,7 @@
                 <?php
                     session_start();
 
+                    date_default_timezone_set('Asia/Manila');
                     $visitor = empty($_SESSION["type"]) ? "" : $_SESSION["type"];
 
                     switch($visitor) {
