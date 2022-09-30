@@ -27,9 +27,9 @@
                         case "admin":
                             {
                                 echo '
-                                <a class="nav-link" href="index.php?page=clientorders">Client Orders</a>
-                                <a class="nav-link" href="index.php?page=clientaccounts">Client Accounts</a>
-                                <a class="nav-link" href="index.php?page=clientmessages">Client Messages</a>';
+                                <a class="nav-link" href="index.php?page=adminorders">Client Orders</a>
+                                <a class="nav-link" href="index.php?page=adminaccounts">Client Accounts</a>
+                                <a class="nav-link" href="index.php?page=adminmessages">Client Messages</a>';
                             }
                             break;
                         default:

@@ -1,5 +1,3 @@
-<?php // include_once "includes/checkout.inc.php" ?>
-
 <section class="my-5" id="app">
     <div class="container mb-5">
         <h2>Cart</h2>
@@ -114,61 +112,83 @@
                         />
                         <div class="invalid-feedback" v-if="!validAddress">{{errAddress}}</div>
                     </div>
-                    <div class="row mb-3">
-                        <div class="col-md-6 col-sm-12">
-                            <label class="form-label" for="gcashName">Gcash Name</label>
-                            <input 
-                                type="text" 
-                                :class="[
-                                    {'is-valid': validGcashName},
-                                    {'is-invalid': !validGcashName && isSubmitted},
-                                    'form-control'
-                                ]"
-                                v-model="gcashName" 
-                                name="gcashName"
-                                id="gcashName" 
-                                @keyup="validateGcashName" 
-                                placeholder="Gcash Name"
-                                required
-                            />
-                            <div class="invalid-feedback" v-if="!validGcashName">{{errGcashName}}</div>
+                    <div class="mb-3">
+                        <select 
+                            :class="[
+                                {'is-valid': validPaymentOption},
+                                {'is-invalid': !validPaymentOption && isSubmitted},
+                                'form-select'
+                            ]"
+                            name="paymentOption"
+                            id="paymentOption"
+                            v-model="paymentOption"
+                            @change="validatePaymentOption" 
+                            aria-label="Payment Option"
+                            required
+                        >
+                            <option value="" selected>-- Select Mode of Payment --</option>
+                            <option value="Onsite payment">On-site Payment</option>
+                            <option value="Gcash payment">Gcash Payment</option>
+                        </select>
+                        <div class="invalid-feedback" v-if="!validPaymentOption">{{errPaymentOption}}</div>
+                    </div>
+                    <div v-if="paymentOption == 'Gcash payment'">
+                        <div class="row mb-3">
+                            <div class="col-md-6 col-sm-12">
+                                <label class="form-label" for="gcashName">Gcash Name</label>
+                                <input 
+                                    type="text" 
+                                    :class="[
+                                        {'is-valid': validGcashName},
+                                        {'is-invalid': !validGcashName && isSubmitted},
+                                        'form-control'
+                                    ]"
+                                    v-model="gcashName" 
+                                    name="gcashName"
+                                    id="gcashName" 
+                                    @keyup="validateGcashName" 
+                                    placeholder="Gcash Name"
+                                    required
+                                />
+                                <div class="invalid-feedback" v-if="!validGcashName">{{errGcashName}}</div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <label class="form-label" for="gcashNumber">Gcash Number</label>
+                                <input 
+                                    type="text"
+                                    :class="[
+                                        {'is-valid': validGcashNumber},
+                                        {'is-invalid': !validGcashNumber && isSubmitted},
+                                        'form-control'
+                                    ]"
+                                    v-model="gcashNumber"
+                                    name="gcashNumber"
+                                    id="gcashNumber"
+                                    @keyup="validateGcashNumber" 
+                                    placeholder="Gcash number"
+                                    required
+                                />
+                                <div class="invalid-feedback" v-if="!validGcashNumber">{{errGcashNumber}}</div>
+                            </div>
                         </div>
-                        <div class="col-md-6 col-sm-12">
-                            <label class="form-label" for="gcashNumber">Gcash Number</label>
+                        <div class="mb-3">
+                            <label class="form-label" for="referenceNo">Payment Reference No.</label>
                             <input 
                                 type="text"
                                 :class="[
-                                    {'is-valid': validGcashNumber},
-                                    {'is-invalid': !validGcashNumber && isSubmitted},
+                                    {'is-valid': validReferenceNo},
+                                    {'is-invalid': !validReferenceNo && isSubmitted},
                                     'form-control'
                                 ]"
-                                v-model="gcashNumber"
-                                name="gcashNumber"
-                                id="gcashNumber"
-                                @keyup="validateGcashNumber" 
-                                placeholder="Gcash number"
+                                v-model="referenceNo"
+                                name="referenceNo"
+                                id="referenceNo"
+                                @keyup="validateReferenceNo" 
+                                placeholder="Reference number"
                                 required
                             />
-                            <div class="invalid-feedback" v-if="!validGcashNumber">{{errGcashNumber}}</div>
+                            <div class="invalid-feedback" v-if="!validReferenceNo">{{errReferenceNo}}</div>
                         </div>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="referenceNo">Payment Reference No.</label>
-                        <input 
-                            type="text"
-                            :class="[
-                                {'is-valid': validReferenceNo},
-                                {'is-invalid': !validReferenceNo && isSubmitted},
-                                'form-control'
-                            ]"
-                            v-model="referenceNo"
-                            name="referenceNo"
-                            id="referenceNo"
-                            @keyup="validateReferenceNo" 
-                            placeholder="Reference number"
-                            required
-                        />
-                        <div class="invalid-feedback" v-if="!validReferenceNo">{{errReferenceNo}}</div>
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-12">
@@ -195,6 +215,15 @@
             this.getCartItems();
         },
         watch: {
+            paymentOption(option) {
+                if(option == "Onsite payment") {
+                    this.referenceNo = "None";
+                    this.validGcashName = this.validGcashNumber = this.validReferenceNo = true;
+                } else if (option == "Gcash payment") {
+                    this.referenceNo = "";
+                    this.validGcashName = this.validGcashNumber = this.validReferenceNo = false;
+                }
+            },
             cart_items() {
                 this.total = 0;
                 Object.entries(this.cart_items).forEach((item) => this.total += Number(item[1]["price"]));
@@ -206,6 +235,7 @@
                 lastname: "<?php echo $_SESSION["lastname"] ?>",
                 email: "<?php echo $_SESSION["email"] ?>",
                 address: "<?php echo $_SESSION["address"] ?>",
+                paymentOption: "",
                 gcashName: "<?php echo $_SESSION["gcash_name"] ?>",
                 gcashNumber: "<?php echo $_SESSION["gcash_number"] ?>",
                 referenceNo: "",
@@ -213,6 +243,7 @@
                 validLastname: false,
                 validEmail: false,
                 validAddress: false,
+                validPaymentOption: false,
                 validGcashName: false,
                 validGcashNumber: false,
                 validReferenceNo: false,
@@ -220,6 +251,7 @@
                 errLastname: "",
                 errEmail: "",
                 errAddress: "",
+                errPaymentOption: "",
                 errGcashName: "",
                 errGcashNumber: "",
                 errReferenceNo: "",
@@ -238,9 +270,13 @@
                 this.validateLastname();
                 this.validateEmail();
                 this.validateAddress();
-                this.validateGcashName();
-                this.validateGcashNumber();
-                this.validateReferenceNo();
+                this.validatePaymentOption();
+                
+                if(this.paymentOption == "Gcash payment") {
+                    this.validateGcashName();
+                    this.validateGcashNumber();
+                    this.validateReferenceNo();
+                }
 
                 const { firstname, lastname, email, address, gcashName, gcashNumber, referenceNo, cart_items, total, validFirstname, validLastname, validEmail, validAddress, validGcashName, validGcashNumber, validReferenceNo } = this;
 
@@ -375,6 +411,17 @@
                         this.validAddress = false;
                     }
                     else this.validAddress = true;
+                }
+            },
+            validatePaymentOption() {
+                const { paymentOption } = this;
+                
+                if(this.isSubmitted) {
+                    if(paymentOption.length == 0) {
+                        this.errPaymentOption = "Mode of payment is required";
+                        this.validPaymentOption = false;
+                    }
+                    else this.validPaymentOption = true;
                 }
             },
             validateGcashName() {

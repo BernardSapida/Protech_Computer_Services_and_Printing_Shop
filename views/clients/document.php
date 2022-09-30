@@ -47,21 +47,24 @@
                         <label class="form-label" for="quantity">Type</label>
                         <select 
                             :class="[
-                                {'is-valid': validSize},
-                                {'is-invalid': !validSize && isSubmitted},
+                                {'is-valid': validtype},
+                                {'is-invalid': !validtype && isSubmitted},
                                 'form-select'
                             ]"
-                            name="size"
-                            id="size"
-                            v-model="size"
-                            @change="validateSize"
-                            aria-label="ID Size"
+                            name="type"
+                            id="type"
+                            v-model="type"
+                            @change="validatetype"
+                            aria-label="ID type"
                             required
                         >
-                            <option value="" selected>-- Select Package --</option>
-                            <option v-for="(package, index) in Object.keys(document_list)" :key="index" :value="package" >{{package}}</option>
+                            <option value="" selected>-- Select Document Type --</option>
+                            <option v-for="(document, index) in Object.keys(document_list)" :key="index" :value="document">{{document}}</option>
                         </select>
-                        <div class="invalid-feedback" v-if="!validSize">{{errSize}}</div>
+                        <div class="invalid-feedback" v-if="!validtype">{{errtype}}</div>
+                    </div>
+                    <div class="mb-3 d-flex">
+                        <a type="button" class="btn btn-dark ms-auto" :href="downloadLink" @click="downloadLink = 'public/files/' + type + '.docx'" download><i class="fa-solid fa-download"></i> Download {{type}}</a>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="price">Price</label>
@@ -117,18 +120,19 @@
                     "Biodata": 15,
                     "Resume": 20,
                 },
+                downloadLink: "",
                 product: "Document",
                 quantity: 0,
-                size: "",
+                type: "",
                 price: 0,
                 document: "",
                 validProductName: false,
                 validQuantity: false,
-                validSize: false,
+                validtype: false,
                 validPrice: false,
                 validDocument: false,
                 errQuantity: "",
-                errSize: "",
+                errtype: "",
                 errPrice: "",
                 errDocument: "",
                 isSubmitted: false
@@ -141,12 +145,12 @@
                 this.isSubmitted = this.validProductName = true;
 
                 this.validateQuantity();
-                this.validateSize();
+                this.validatetype();
                 this.validatePicture();
 
-                const { validProductName, validQuantity, validSize, validPrice, validDocument } = this;
+                const { validProductName, validQuantity, validtype, validPrice, validDocument } = this;
 
-                if(validProductName && validQuantity && validSize && validPrice && validDocument) {
+                if(validProductName && validQuantity && validtype && validPrice && validDocument) {
                     swal({
                         title: "Successfully added to cart!",
                         text: "View your items in cart",
@@ -170,14 +174,14 @@
 
                 this.getPrice();
             },
-            validateSize() {
-                const { size } = this;
+            validatetype() {
+                const { type } = this;
 
                 if(this.isSubmitted) {
-                    if(size == "") {
-                        this.errSize = "Document type is required";
-                        this.validSize = false;
-                    } else this.validSize = true;
+                    if(type == "") {
+                        this.errtype = "Document type is required";
+                        this.validtype = false;
+                    } else this.validtype = true;
                 }
 
                 this.getPrice();
@@ -207,10 +211,10 @@
                 }
             },
             getPrice() {
-                const { document_list, quantity, size } = this;
+                const { document_list, quantity, type } = this;
 
-                if(quantity > 0 && size != "") {
-                    this.price = document_list[size] * quantity;
+                if(quantity > 0 && type != "") {
+                    this.price = document_list[type] * quantity;
                     this.validPrice = true;
                 } else this.price = 0;
             }

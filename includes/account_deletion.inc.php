@@ -3,8 +3,12 @@
 
     $db = new Database();
 
-    if(isset($_POST['password'])) {
-        $result = $db -> connect(
+    session_start();
+
+    $data = json_decode(file_get_contents("php://input"), true);
+
+    if(isset($data['password'])) {
+        $result1 = $db -> connect(
             "update", 
             "accounts", 
             array(
@@ -13,17 +17,15 @@
             "account"
         );
 
-        $result = $db -> connect(
+        $result2 = $db -> connect(
             "insert", 
             "deleted_account", 
             array(
                 "firstname" => $_SESSION["firstname"],
                 "lastname" => $_SESSION["lastname"],
                 "email" => $_SESSION["email"],
-                "reason" => $_POST["reason"],
+                "reason" => $data["reason"],
             ),
         );
-
-        header("Location: index.php?page=myaccount");
     }
 ?>

@@ -34,9 +34,27 @@
         }
 
         function selectData($conn, $tableName, $data, $account) {
-            $stmt = $conn->prepare("SELECT * FROM `$tableName` WHERE `$data` = '$account'");
-            $stmt -> execute();
-            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                if(strcmp($data, "email") == 0) {
+                $stmt = $conn->prepare("SELECT * FROM `$tableName` WHERE `$data` = '$account'");
+                $stmt -> execute();
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            } else if(strcmp($data, "uid") == 0) {
+                $stmt = $conn->prepare("SELECT * FROM `$tableName` WHERE `$data` = '$account'");
+                $stmt -> execute();
+                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            } else if(strcmp($account, "Completed") == 0) {
+                $stmt = $conn->prepare("SELECT * FROM `$tableName` WHERE `$data` = '$account'");
+                $stmt -> execute();
+                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            } else if(strcmp($account, "Incomplete") == 0) {
+                $stmt = $conn->prepare("SELECT * FROM `$tableName` WHERE NOT `$data` = 'Completed'");
+                $stmt -> execute();
+                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            } else {
+                $stmt = $conn->prepare("SELECT * FROM `$tableName`");
+                $stmt -> execute();
+                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            }
 
             // if(!empty($data) && !empty($account)) {
             //     $stmt = $conn->prepare("SELECT * FROM `$tableName` WHERE `$data` = '$account'");
@@ -118,6 +136,7 @@
                     break;
                 case "client_carts":
                     {
+                        $uid = $data['uid'];
                         $name = $data["name"];
                         $email = $data["email"];
                         $address = $data["address"];
@@ -129,7 +148,8 @@
                         $items = $data["items"];
                         $total = $data["total"];
 
-                        $stmt = $conn->prepare("INSERT INTO `$tableName` (`name`, `email`, `address`, `gcash_name`, `gcash_number`, `reference_no`, `order_number`, `transaction_number`, `items`, `total`) VALUES (:name, :email, :address, :gcashName, :gcashNumber, :referenceNo, :orderNumber, :transactionNumber, :items, :total)");
+                        $stmt = $conn->prepare("INSERT INTO `$tableName` (`uid`, `name`, `email`, `address`, `gcash_name`, `gcash_number`, `reference_no`, `order_number`, `transaction_number`, `items`, `total`) VALUES (:uid, :name, :email, :address, :gcashName, :gcashNumber, :referenceNo, :orderNumber, :transactionNumber, :items, :total)");
+                        $stmt -> bindParam(':uid', $uid);
                         $stmt -> bindParam(':name', $name);
                         $stmt -> bindParam(':email', $email);
                         $stmt -> bindParam(':address', $address);
@@ -148,12 +168,14 @@
                         $firstname = $data['firstname'];
                         $lastname = $data['lastname'];
                         $email = $data['email'];
+                        $subject = $data['subject'];
                         $message = $data['message'];
 
-                        $stmt = $conn->prepare("INSERT INTO `$tableName` (`firstname`, `lastname`, `email`, `message`) VALUES (:firstname, :lastname, :email, :message)");
+                        $stmt = $conn->prepare("INSERT INTO `$tableName` (`firstname`, `lastname`, `email`, `subject`, `message`) VALUES (:firstname, :lastname, :email, :subject, :message)");
                         $stmt -> bindParam(':firstname', $firstname);
                         $stmt -> bindParam(':lastname', $lastname);
                         $stmt -> bindParam(':email', $email);
+                        $stmt -> bindParam(':subject', $subject);
                         $stmt -> bindParam(':message', $message);
                         $stmt->execute();
                     }
@@ -215,15 +237,23 @@
                         return "Success";
                     };
                     break;
-                // case "admin_orders":
-                //     {
-                //         $transactionNo = $data['transactionNo'];
-                //         $orderStatus = $data['orderStatus'];
+                case "client_carts":
+                    {
+                        if(strcmp($account, "item_status") == 0) {
+                            $transactioNumber = $data['transactioNumber'];
+                            $itemStatus = $data['status'];
 
-                //         $stmt = $conn->prepare("UPDATE `$tableName` SET `order status` = '$orderStatus' WHERE `transaction no.` = '$transactionNo'");
-                //         $stmt->execute();
-                //     };
-                //     break;
+                            $stmt = $conn->prepare("UPDATE `$tableName` SET `item_status` = '$itemStatus' WHERE `transaction_number` = '$transactioNumber'");
+                            $stmt->execute();
+                        } else if (strcmp($account, "transaction_status") == 0) {
+                            $transactioNumber = $data['transactioNumber'];
+                            $transactionStatus = $data['status'];
+
+                            $stmt = $conn->prepare("UPDATE `$tableName` SET `transaction_status` = '$transactionStatus' WHERE `transaction_number` = '$transactioNumber'");
+                            $stmt->execute();
+                        }
+                    };
+                    break;
                 // case "admin_product":
                 //     {
                 //         $productCode = $data['productCode'];

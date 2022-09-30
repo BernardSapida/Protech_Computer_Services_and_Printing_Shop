@@ -1,4 +1,4 @@
-<section class="my-5">
+<section class="my-5" id="app">
     <div class="container">
         <h2 class="text-center">Contact Us Messages</h2>
         <p class="text-center text-secondary">Clients feedback and question</p>
@@ -8,7 +8,6 @@
                 <thead class="table-dark">
                     <tr>
                         <th>ID</th>
-                        <th>Image</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Subject</th>
@@ -16,7 +15,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr   tr v-for="(items, index) in table_messages" :id="index" :key="index">
+                        <td>{{items["id"]}}</td>
+                        <td>{{items["firstname"]}} {{items["lastname"]}}</td>
+                        <td>{{items["email"]}}</td>
+                        <td>{{items["subject"]}}</td>
+                        <td>{{items["message"]}}</td>
+                    </tr>
+                    <tr v-if="table_messages.length == 0">
                         <td class="text-center" colspan="7">Empty</td>
                     </tr>
                 </tbody>
@@ -24,3 +30,30 @@
         </div>
     </div>
 </section>
+
+<script>
+    const { createApp } = Vue
+
+    createApp({
+        created() {
+            this.getMessages();
+        },
+        data() {
+            return {
+                table_messages: [],
+                details: [],
+                downloadLink: ""
+            }
+        },
+        methods: {
+            async getMessages() {
+                let response = await axios({
+                    method: 'GET',
+                    url: 'includes/getMessages.inc.php'
+                });
+
+                this.table_messages = response.data;
+            },
+        }
+    }).mount('#app')
+</script>

@@ -8,6 +8,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" rel="stylesheet">
     <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <script src="public/js/slim.min.js" defer></script>
+    <script src="public/js/bootstrap.min.js" defer></script>
     <script src="public/js/bootstrap.bundle.min.js" defer></script>
     <script src="public/js/popper.min.js" defer></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

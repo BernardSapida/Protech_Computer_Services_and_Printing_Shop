@@ -1,6 +1,5 @@
 <?php include_once "includes/account.inc.php" ?>
 <?php include_once "includes/password.inc.php" ?>
-<?php include_once "includes/account_deletion.inc.php" ?>
 
 <section class="my-5" id="app">
     <div class="container light-style flex-grow-1 container-p-y">
@@ -256,7 +255,7 @@
                             <div class="p-3">
                                 <h3>Deletion of account</h3>
                                 <hr>
-                                <form class="deletion-validation forms" @submit.prevent="submitDeletionForm" method="POST" action="" novalidate>
+                                <form class="deletion-validation forms" @submit.prevent="submitDeletionForm" method="POST" novalidate>
                                     <p>Hi, <strong>Bernard Sapida</strong></p>
                                     <p>You can delete your account. It means you can't recover or open your account when it's been deleted.</p>
                                     <div class="mb-3">
@@ -667,14 +666,25 @@
 
                 const { reason, password, validReason, validPassword } = this;
 
-                if(validPassword && validReason) {
+                if(validReason && validPassword) {
                     swal({
-                        title: "Account successfully created!",
-                        text: "You can now use your account to sign in",
+                        title: "Account successfully deleted!",
+                        text: "You are redirecting to our signin page",
                         icon: "success",
                         button: false,
                         timer: 2000
-                    }).then(() => form.submit());
+                    }).then(async () => {
+                        let response = await axios({
+                            method: 'POST',
+                            url: 'includes/account_deletion.inc.php',
+                            data: {
+                                reason: reason,
+                                password: password,
+                            }
+                        });
+
+                        window.location.href = "index.php?page=signout";
+                    });
                 }
             },
             validateReason() {
@@ -696,7 +706,7 @@
                 const { password } = this;
 
                 if(this.isAccountDeletionSubmitted) {
-                    if(currentPassword.length == 0) {
+                    if(password.length == 0) {
                         this.errPassword = "Password is required";
                         this.validPassword = false;
                         return;
@@ -709,8 +719,6 @@
                             password: password,
                         }
                     });
-
-                    console.log(response);
 
                     if(response.data != "password matched") {
                         this.errPassword = "Password is invalid!";
