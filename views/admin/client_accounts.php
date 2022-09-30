@@ -1,3 +1,4 @@
+<?php include_once "includes/adminPageRestriction.inc.php" ?>
 <section class="my-5" id="app">
     <div class="container">
         <h2 class="text-center">Client Accounts</h2>

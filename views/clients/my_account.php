@@ -1,3 +1,4 @@
+<?php include_once "includes/clientPageRestriction.inc.php" ?>
 <?php include_once "includes/account.inc.php" ?>
 <?php include_once "includes/password.inc.php" ?>
 

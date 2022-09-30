@@ -1,3 +1,4 @@
+<?php include_once "includes/visitorPageRestriction.inc.php" ?>
 <?php include_once "includes/signup.inc.php" ?>
 
 <section class="my-3">

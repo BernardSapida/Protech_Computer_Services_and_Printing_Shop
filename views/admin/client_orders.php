@@ -1,3 +1,4 @@
+<?php include_once "includes/adminPageRestriction.inc.php" ?>
 <section class="my-5" id="app">
     <div class="container my-5">
         <div class="row">
@@ -80,7 +81,8 @@
                             >
                                 <option value="Pending">Pending</option>
                                 <option value="Processing">Processing</option>
-                                <option value="Completed">Ready to claim</option>
+                                <option value="Ready to claim">Ready to claim</option>
+                                <option value="Completed">Completed</option>
                             </select>
                         </td>
                         <td>{{items["date"]}}</td>

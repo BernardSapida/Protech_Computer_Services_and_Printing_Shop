@@ -1,3 +1,4 @@
+<?php include_once "includes/clientPageRestriction.inc.php" ?>
 <section class="container my-5">
     <div class="container text-center mb-5 pb-5 border-bottom">
         <h1>Our Services</h1>

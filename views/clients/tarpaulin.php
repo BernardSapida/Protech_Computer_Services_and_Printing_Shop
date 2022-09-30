@@ -1,3 +1,4 @@
+<?php include_once "includes/clientPageRestriction.inc.php" ?>
 <?php include_once "includes/tarpaulin.inc.php" ?>
 
 <section class="my-5">

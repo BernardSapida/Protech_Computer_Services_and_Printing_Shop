@@ -1,3 +1,5 @@
+<?php include_once "includes/clientPageRestriction.inc.php" ?>
+
 <section class="my-5" id="app">
     <div class="container mb-5">
         <h2>Cart</h2>

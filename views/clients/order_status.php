@@ -1,3 +1,4 @@
+<?php include_once "includes/clientPageRestriction.inc.php" ?>
 <section class="my-5" id="app">
     <div class="container">
         <h2>Order Status</h2>
