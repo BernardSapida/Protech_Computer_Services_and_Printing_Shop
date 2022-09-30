@@ -1,5 +1,6 @@
 <?php include_once "includes/account.inc.php" ?>
 <?php include_once "includes/password.inc.php" ?>
+<?php include_once "includes/account_deletion.inc.php" ?>
 
 <section class="my-5" id="app">
     <div class="container light-style flex-grow-1 container-p-y">
@@ -186,45 +187,60 @@
                             <div class="p-3">
                                 <h3>Change Password</h3>
                                 <hr>
-                                <form class="password-validation forms" @submit.prevent="submitPasswordForm" novalidate>
+                                <form class="password-validation forms" @submit.prevent="submitPasswordForm" method="POST" action="" novalidate>
                                     <div class="mb-3">
                                         <label class="form-label" for="currentPassword">Current password</label>
                                         <input 
-                                            type="password" 
+                                            type="password"
                                             :class="[
+                                                {'is-valid': validCurrentPassword},
+                                                {'is-invalid': !validCurrentPassword && isPasswordSubmitted},
                                                 'form-control'
-                                            ]" 
-                                            name="currentPassword" 
-                                            id="currentPassword" 
+                                            ]"
+                                            v-model="currentPassword"
+                                            name="currentPassword"
+                                            id="currentPassword"
+                                            @keyup="validateCurrentPassword" 
+                                            placeholder="Current password"
                                             required
                                         >
-                                        <div class="invalid-feedback">Current password is required</div>
+                                        <div class="invalid-feedback" v-if="!validCurrentPassword">{{errCurrentPassword}}</div>
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label" for="newPassword">New password</label>
                                         <input 
-                                            type="password" 
+                                            type="password"
                                             :class="[
+                                                {'is-valid': validNewPassword},
+                                                {'is-invalid': !validNewPassword && isPasswordSubmitted},
                                                 'form-control'
-                                            ]" 
-                                            name="newPassword" 
-                                            id="newPassword" 
+                                            ]"
+                                            v-model="newPassword"
+                                            name="newPassword"
+                                            id="newPassword"
+                                            @keyup="validateNewPassword" 
+                                            placeholder="New password"
                                             required
                                         >
-                                        <div class="invalid-feedback">New password is required</div>
+                                        <div class="invalid-feedback" v-if="!validNewPassword">{{errNewPassword}}</div>
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label" for="confirmPassword">Confirm password</label>
                                         <input 
-                                            type="password" 
+                                            type="password"
                                             :class="[
+                                                {'is-valid': validConfirmPassword},
+                                                {'is-invalid': !validConfirmPassword && isPasswordSubmitted},
                                                 'form-control'
-                                            ]" 
-                                            name="confirmPassword" 
-                                            id="confirmPassword" 
+                                            ]"
+                                            v-model="confirmPassword"
+                                            name="confirmPassword"
+                                            id="confirmPassword"
+                                            @keyup="validateConfirmPassword" 
+                                            placeholder="Confirm password"
                                             required
                                         >
-                                        <div class="invalid-feedback">Confirm password is required</div>
+                                        <div class="invalid-feedback" v-if="!validConfirmPassword">{{errConfirmPassword}}</div>
                                     </div>
                                     <div class="me-3 mb-3 d-flex gap-2" v-if="!isEditPassword">
                                         <button type="button" class="btn btn-dark ms-auto" @click="editPassword">Change password</button>
@@ -240,18 +256,44 @@
                             <div class="p-3">
                                 <h3>Deletion of account</h3>
                                 <hr>
-                                <form class="deletion-validation forms" @submit.prevent="submitDeletionForm" novalidate>
+                                <form class="deletion-validation forms" @submit.prevent="submitDeletionForm" method="POST" action="" novalidate>
                                     <p>Hi, <strong>Bernard Sapida</strong></p>
                                     <p>You can delete your account. It means you can't recover or open your account when it's been deleted.</p>
                                     <div class="mb-3">
-                                        <label class="form-label" for="deletion_reason"><strong>Why are you going to delete your account?</strong></label>
-                                        <input type="text" class="form-control" name="deletion_reason" id="deletion_reason" placeholder="Reason of account deletion" required>
-                                        <div class="invalid-feedback">Deletion reason is required</div>
+                                        <label class="form-label" for="reason"><strong>Why are you going to delete your account?</strong></label>
+                                        <input 
+                                            type="text" 
+                                            :class="[
+                                                {'is-valid': validReason},
+                                                {'is-invalid': !validReason && isAccountDeletionSubmitted},
+                                                'form-control'
+                                            ]"
+                                            v-model="reason"
+                                            name="reason" 
+                                            id="reason" 
+                                            @keyup="validateReason" 
+                                            placeholder="Reason of account deletion" 
+                                            required
+                                        >
+                                        <div class="invalid-feedback" v-if="!validReason">{{errReason}}</div>
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label" for="password"><strong>To continue, please enter your password</strong></label>
-                                        <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
-                                        <div class="invalid-feedback">Password is required</div>
+                                        <input 
+                                            type="password"
+                                            :class="[
+                                                {'is-valid': validPassword},
+                                                {'is-invalid': !validPassword && isAccountDeletionSubmitted},
+                                                'form-control'
+                                            ]"
+                                            v-model="password"
+                                            name="password"
+                                            id="password"
+                                            @keyup="validatePassword" 
+                                            placeholder="Password"
+                                            required
+                                        >
+                                        <div class="invalid-feedback" v-if="!validPassword">{{errPassword}}</div>
                                     </div>
                                     <div class="d-flex">
                                         <button type="submit" class="btn btn-danger ms-auto">Delete account</button>
@@ -304,8 +346,25 @@
 
                 isChangePassword: false,
                 isEditPassword: false,
-                
+                isPasswordSubmitted: false,
+                currentPassword: "",
+                newPassword: "",
+                confirmPassword: "",
+                validCurrentPassword: false,
+                validNewPassword: false,
+                validConfirmPassword: false,
+                errCurrentPassword: "",
+                errNewPassword: "",
+                errConfirmPassword: "",
+
                 isDeleteAccount: false,
+                isAccountDeletionSubmitted: false,
+                reason: "",
+                password: "",
+                validReason: false,
+                validPassword: false,
+                errReason: "",
+                errPassword: "",
             }
         },
         methods: {
@@ -354,11 +413,11 @@
                         this.validFirstname = false;
                     }
                     else if(firstname.length < 2) {
-                        this.errFirstname = "First name is too short";
+                        this.errFirstname = "Firstname is too short";
                         this.validFirstname = false;
                     }
                     else if(!/^[A-z]+$/.test(firstname)) {
-                        this.errFirstname = "First name is invalid";
+                        this.errFirstname = "Firstname is invalid";
                         this.validFirstname = false;
                     }
                     else this.validFirstname = true;
@@ -377,7 +436,7 @@
                         this.validLastname = false;
                     }
                     else if(!/^[A-z]+$/.test(lastname)) {
-                        this.errLastname = "First name is invalid";
+                        this.errLastname = "Lastname is invalid";
                         this.validLastname = false;
                     }
                     else this.validLastname = true;
@@ -512,21 +571,152 @@
             // Client password
             submitPasswordForm() {
                 const form = document.querySelector('.password-validation');
-                form.classList.add('was-validated');
+
+                this.isPasswordSubmitted = true;
+
+                this.validateCurrentPassword();
+                this.validateNewPassword();
+                this.validateConfirmPassword();
+
+                const { currentPassword, newPassword, confirmPassword, validCurrentPassword, validNewPassword, validConfirmPassword } = this;
+
+                if(validCurrentPassword && validNewPassword && validConfirmPassword) {
+                    swal({
+                        title: "Account successfully created!",
+                        text: "You can now use your account to sign in",
+                        icon: "success",
+                        button: false,
+                        timer: 2000
+                    }).then((okay) => form.submit());
+                }
             },
             cancelEditPassword() {
                 const form = document.querySelector('.password-validation');
                 form.classList.remove('was-validated');
+                form.reset();
                 this.isEditPassword = false;
             },
             editPassword() {
                 this.isEditPassword = true;
             },
+            async validateCurrentPassword() {
+                const { currentPassword } = this;
+
+                if(this.isPasswordSubmitted) {
+                    if(currentPassword.length == 0) {
+                        this.errCurrentPassword = "Current password is required";
+                        this.validCurrentPassword = false;
+                        return;
+                    }
+
+                    let response = await axios({
+                        method: 'POST',
+                        url: 'includes/verifyPassword.inc.php',
+                        data: {
+                            password: currentPassword,
+                        }
+                    });
+
+                    if(response.data != "password matched") {
+                        this.errCurrentPassword = "Current password is invalid!";
+                        this.validCurrentPassword = false;
+                    } else this.validCurrentPassword = true;
+                }
+            },
+            validateNewPassword() {
+                const { newPassword } = this;
+
+                this.validateConfirmPassword();
+                
+                if(this.isPasswordSubmitted) {
+                    if(newPassword.length == 0) {
+                        this.errNewPassword = "New password is required";
+                        this.validNewPassword = false;
+                    }
+                    else if(newPassword.length < 8) {
+                        this.errNewPassword = "New password length must be greater than 8 characters";
+                        this.validNewPassword = false;
+                    }
+                    else this.validNewPassword = true;
+                }
+            },
+            validateConfirmPassword() {
+                const { newPassword, confirmPassword } = this;
+                
+                if(this.isPasswordSubmitted) {
+                    if(confirmPassword.length == 0) {
+                        this.errConfirmPassword = "Confirm password is required";
+                        this.validConfirmPassword = false;
+                    }
+                    else if(newPassword != confirmPassword) {
+                        this.errConfirmPassword = "Confirm password didn't match to password";
+                        this.validConfirmPassword = false;
+                    }
+                    else this.validConfirmPassword = true;
+                }
+            },
 
             // Client Delete Account
             submitDeletionForm() {
                 const form = document.querySelector('.deletion-validation');
-                form.classList.add('was-validated');
+
+                this.isAccountDeletionSubmitted = true;
+
+                this.validateReason();
+                this.validatePassword();
+
+                const { reason, password, validReason, validPassword } = this;
+
+                if(validPassword && validReason) {
+                    swal({
+                        title: "Account successfully created!",
+                        text: "You can now use your account to sign in",
+                        icon: "success",
+                        button: false,
+                        timer: 2000
+                    }).then(() => form.submit());
+                }
+            },
+            validateReason() {
+                const { reason } = this;
+
+                if(this.isAccountDeletionSubmitted) {
+                    if(reason.length == 0) {
+                        this.errReason = "Reason is required";
+                        this.validReason = false;
+                    }
+                    else if(reason.length < 10) {
+                        this.errReason = "Reason is too short";
+                        this.validReason = false;
+                    }
+                    else this.validReason = true;
+                }
+            },
+            async validatePassword() {
+                const { password } = this;
+
+                if(this.isAccountDeletionSubmitted) {
+                    if(currentPassword.length == 0) {
+                        this.errPassword = "Password is required";
+                        this.validPassword = false;
+                        return;
+                    }
+
+                    let response = await axios({
+                        method: 'POST',
+                        url: 'includes/verifyPassword.inc.php',
+                        data: {
+                            password: password,
+                        }
+                    });
+
+                    console.log(response);
+
+                    if(response.data != "password matched") {
+                        this.errPassword = "Password is invalid!";
+                        this.validPassword = false;
+                    } else this.validPassword = true;
+                }
             },
             redirectLink(link) {
                 const forms = document.querySelectorAll('.forms');

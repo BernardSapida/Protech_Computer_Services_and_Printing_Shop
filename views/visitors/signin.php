@@ -103,11 +103,20 @@
                         this.errEmail = "Email didn't exist";
                         this.validEmail = false;
                     }
+                    else if(response.data == "Deleted account") {
+                        swal({
+                            title: "The account was deleted",
+                            text: "Send us a message to activate your account",
+                            icon: "error",
+                            button: false,
+                            timer: 2000
+                        })
+                    }
                     else if(response.data == "Incorrect password") {
                         this.errPassword = "Password is incorrect";
                         this.validPassword = false;
                     }
-                    else if(response.data == "Authorized") {
+                    else if(response.data[0] == "Authorized" && response.data[1] == "client") {
                         swal({
                             title: "Successfully!",
                             text: "You are now signed in to your account",
@@ -115,7 +124,15 @@
                             button: false,
                             timer: 2000
                         }).then((okay) => window.location.href = "index.php?page=services");
-                        
+                    }
+                    else if(response.data[0] == "Authorized" && response.data[1] == "admin") {
+                        swal({
+                            title: "Successfully!",
+                            text: "You are now signed in to your account",
+                            icon: "success",
+                            button: false,
+                            timer: 2000
+                        }).then((okay) => window.location.href = "index.php?page=adminorders");
                     }
                 }
             },

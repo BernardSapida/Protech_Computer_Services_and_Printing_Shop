@@ -158,6 +158,21 @@
                         $stmt->execute();
                     }
                     break;
+                case "deleted_account":
+                    {
+                        $firstname = $data['firstname'];
+                        $lastname = $data['lastname'];
+                        $email = $data['email'];
+                        $reason = $data['reason'];
+
+                        $stmt = $conn->prepare("INSERT INTO `$tableName` (`firstname`, `lastname`, `email`, `reason`) VALUES (:firstname, :lastname, :email, :reason)");
+                        $stmt -> bindParam(':firstname', $firstname);
+                        $stmt -> bindParam(':lastname', $lastname);
+                        $stmt -> bindParam(':email', $email);
+                        $stmt -> bindParam(':reason', $reason);
+                        $stmt->execute();
+                    }
+                    break;
             }
                 
         }
@@ -187,6 +202,11 @@
                                 $password = $data['password'];
 
                                 $stmt = $conn->prepare("UPDATE `$tableName` SET `password` = '$password' WHERE uid = '$uid'");
+                                break;
+                            case "account":
+                                $uid = $data['uid'];
+
+                                $stmt = $conn->prepare("UPDATE `$tableName` SET `status` = 'deactivated' WHERE uid = '$uid'");
                                 break;
                         }
                         

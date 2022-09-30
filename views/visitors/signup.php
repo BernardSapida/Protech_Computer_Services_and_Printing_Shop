@@ -181,7 +181,8 @@
                                                 id="confirmPassword"
                                                 @keyup="validateConfirmPassword" 
                                                 placeholder="Confirm password"
-                                                required/>
+                                                required
+                                            />
                                             <div class="invalid-feedback" v-if="!validConfirmPassword">{{errConfirmPassword}}</div>
                                         </div>
                                     </div>
@@ -239,7 +240,6 @@
         methods: {
             submitForm() {
                 const form = document.querySelector('.needs-validation');
-                const inputs = document.querySelectorAll('input');
 
                 this.isSubmitted = true;
 
@@ -360,7 +360,7 @@
                         this.errGcashName = "Gcash name is too short";
                         this.validGcashName = false;
                     }
-                    else if(!/^[A-z]+$/.test(gcashName)) {
+                    else if(!/^[A-z ]+$/.test(gcashName)) {
                         this.errGcashName = "Gcash name is invalid";
                         this.validGcashName = false;
                     }
