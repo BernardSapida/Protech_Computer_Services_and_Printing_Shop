@@ -20,9 +20,8 @@
                         <td>{{items["product"]}}</td>
                         <td>{{items["quantity"]}}</td>
                         <td>{{items["price"]}}</td>
-                        <td>{{items["size"]}}</td>
+                        <td>{{items["type"] || items["size"]}}</td>
                         <td>
-                            <button type="button" class="btn btn-dark" @click=""><i class="fa-solid fa-pen-to-square"></i> edit</button>
                             <button type="button" class="btn btn-danger mx-2" @click="removeRow(index)"><i class="fa-solid fa-trash"></i> Remove</button>
                         </td>
                     </tr>
@@ -344,6 +343,7 @@
                 });
 
                 this.cart_items = response.data;
+                console.log(response.data)
             },
             validateFirstname() {
                 const { firstname } = this;

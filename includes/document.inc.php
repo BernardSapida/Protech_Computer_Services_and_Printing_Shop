@@ -13,9 +13,6 @@
         $document_upload_path = 'public/documents/' . $document_new_name;
         move_uploaded_file($document_tmp, $document_upload_path);
 
-        $document = $document_new_name;
-        $_SESSION["document"] = $document;
-
         $_POST["date"] = date("F j, Y h:i:s A");
         $_POST["file"] = $document_new_name;
 

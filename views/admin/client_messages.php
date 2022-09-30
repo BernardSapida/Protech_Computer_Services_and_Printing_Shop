@@ -10,7 +10,6 @@
                         <th>ID</th>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>Subject</th>
                         <th>Message</th>
                     </tr>
                 </thead>
@@ -19,7 +18,6 @@
                         <td>{{items["id"]}}</td>
                         <td>{{items["firstname"]}} {{items["lastname"]}}</td>
                         <td>{{items["email"]}}</td>
-                        <td>{{items["subject"]}}</td>
                         <td>{{items["message"]}}</td>
                     </tr>
                     <tr v-if="table_messages.length == 0">

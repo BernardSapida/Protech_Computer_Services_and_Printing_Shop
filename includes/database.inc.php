@@ -168,14 +168,12 @@
                         $firstname = $data['firstname'];
                         $lastname = $data['lastname'];
                         $email = $data['email'];
-                        $subject = $data['subject'];
                         $message = $data['message'];
 
-                        $stmt = $conn->prepare("INSERT INTO `$tableName` (`firstname`, `lastname`, `email`, `subject`, `message`) VALUES (:firstname, :lastname, :email, :subject, :message)");
+                        $stmt = $conn->prepare("INSERT INTO `$tableName` (`firstname`, `lastname`, `email`, `message`) VALUES (:firstname, :lastname, :email, :message)");
                         $stmt -> bindParam(':firstname', $firstname);
                         $stmt -> bindParam(':lastname', $lastname);
                         $stmt -> bindParam(':email', $email);
-                        $stmt -> bindParam(':subject', $subject);
                         $stmt -> bindParam(':message', $message);
                         $stmt->execute();
                     }

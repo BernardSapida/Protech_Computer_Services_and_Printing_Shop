@@ -3,12 +3,11 @@
 
     session_start();
 
-    error_reporting(E_ERROR | E_PARSE);
-
     $db = new Database();
     $data = json_decode(file_get_contents("php://input"), true);
 
     if(!empty($data)) {
+        $uid = $_SESSION["uid"];
         $firstname = $data["firstname"];
         $lastname = $data["lastname"];
         $email = $data["email"];
@@ -25,6 +24,7 @@
             "insert", 
             "client_carts", 
             array(
+                "uid" => $uid, 
                 "name" => $firstname . " " . $lastname, 
                 "email" => $email, 
                 "address" => $address, 

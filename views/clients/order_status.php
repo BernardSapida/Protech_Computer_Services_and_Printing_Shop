@@ -57,7 +57,7 @@
                             <tbody>
                                 <tr v-if="table_items.length > 0" v-for="(item, index) in details" :id="index" :key="index">
                                     <td>{{item["product"]}}</td>
-                                    <td>{{item["size"]}}</td>
+                                    <td>{{item["size"] || item["type"]}}</td>
                                     <td>{{item["quantity"]}}</td>
                                     <td>Php {{item["price"].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</td>
                                     <td>
@@ -98,6 +98,7 @@
                 });
 
                 this.table_items = response.data;
+                console.log(response.data);
             },
             async getDetails(id) {
                 this.details = JSON.parse(this.table_items[id]["items"]);

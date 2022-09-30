@@ -15,7 +15,6 @@
         move_uploaded_file($image_tmp, $image_upload_path);
 
         $image = $image_new_name;
-        $_SESSION["image"] = $image;
 
         $_POST["date"] = date("F j, Y h:i:s A");
         $_POST["file"] = $image_new_name;
