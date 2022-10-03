@@ -21,9 +21,6 @@
                     case "update":
                         $result = $this -> updateData($conn, $tableName, $data, $account);
                         break;
-                    case "delete":
-                        $this -> deleteData($conn, $tableName, $data);
-                        break;
                 }
                 
                 return $result;
@@ -34,7 +31,7 @@
         }
 
         function selectData($conn, $tableName, $data, $account) {
-                if(strcmp($data, "email") == 0) {
+            if(strcmp($data, "email") == 0) {
                 $stmt = $conn->prepare("SELECT * FROM `$tableName` WHERE `$data` = '$account'");
                 $stmt -> execute();
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -55,51 +52,6 @@
                 $stmt -> execute();
                 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             }
-
-            // if(!empty($data) && !empty($account)) {
-            //     $stmt = $conn->prepare("SELECT * FROM `$tableName` WHERE `$data` = '$account'");
-            //     $stmt -> execute();
-            //     $result = $stmt->fetch(PDO::FETCH_ASSOC);
-            // } else {
-            //     switch($tableName) {
-            //         case "supplier_customer":
-            //             {
-            //                 if(strcmp($data, "order status") == 0) {
-            //                     $stmt = $conn->prepare("SELECT * FROM `$tableName` WHERE `order status` = 'completed'");
-            //                 } else {
-            //                     $stmt = $conn->prepare("SELECT * FROM `$tableName` ORDER BY CASE 
-            //                     WHEN `order status` = 'Processing' THEN 1 
-            //                     WHEN `order status` = 'To ship' THEN 2 
-            //                     WHEN `order status` = 'To receive' THEN 3 
-            //                     WHEN `order status` = 'Completed' THEN 4 
-            //                     WHEN `order status` = 'Cancelled' THEN 5
-            //                     END");
-            //                 }
-            //             }
-            //             break;
-            //         case "supplier_product":
-            //             $supplierName = $data["supplierName"];
-            //             $stmt = $conn->prepare("SELECT * FROM `$tableName` WHERE `supplier name` = '$supplierName' ORDER BY `box quantity` ASC");
-            //             break;
-            //         case "admin_product":
-            //             $stmt = $conn->prepare("SELECT * FROM `$tableName` ORDER BY `quantity` ASC");
-            //             break;
-            //         case "admin_orders":
-            //             if(strcmp($data, "all records") == 0) $stmt = $conn->prepare("SELECT * FROM `$tableName` ORDER BY CASE  WHEN `order status` = 'Processing' THEN 1  WHEN `order status` = 'To ship' THEN 2  WHEN `order status` = 'To receive' THEN 3  WHEN `order status` = 'Completed' THEN 4  WHEN `order status` = 'Cancelled' THEN 5 END");
-            //             else $stmt = $conn->prepare("SELECT * FROM `$tableName` WHERE `order status` = 'completed'");
-            //             break;
-            //         case "accounts":
-            //             $stmt = $conn->prepare("SELECT * FROM `$tableName` WHERE `type` = '$data'");
-            //             break;
-            //         default:
-            //             $stmt = $conn->prepare("SELECT * FROM $tableName");
-            //             break;
-            //     }
-
-            //     $stmt -> execute();
-            //     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            // }
-
             return $result;
         }
 
@@ -252,67 +204,7 @@
                         }
                     };
                     break;
-                // case "admin_product":
-                //     {
-                //         $productCode = $data['productCode'];
-                //         if(!empty($account)) {
-                //             $status = $data['status'];
-
-                //             $stmt = $conn->prepare("UPDATE `$tableName` SET `status` = '$status' WHERE `product code` = '$productCode'");
-                //             $stmt->execute();
-                //         } else {
-                //             $productName = $data['productName'];
-                //             $category = $data['category'];
-                //             $quantity = $data['quantity'];
-                //             $price = $data['price'];
-
-                //             $stmt = $conn->prepare("UPDATE `$tableName` SET `product name` = '$productName', `category` = '$category', `price` = '$price', `quantity` = '$quantity' WHERE `product code` = '$productCode'");
-                //             $stmt->execute();
-                //         }
-                //     };
-                //     break;
-                // case "supplier_customer":
-                //     {
-                //         $transactionNo = $data['transactionNo'];
-                //         $orderStatus = $data['orderStatus'];
-
-                //         $stmt = $conn->prepare("UPDATE `$tableName` SET `order status` = '$orderStatus' WHERE `transaction no.` = '$transactionNo'");
-                //         $stmt->execute();
-                //     };
-                //     break;
-                // case "supplier_product":
-                //     {
-                //         if(!empty($account)) {
-                //             $productCode = $data['productCode'];
-                //             $status = $data['status'];
-
-                //             $stmt = $conn->prepare("UPDATE `$tableName` SET `status` = '$status' WHERE `product code` = '$productCode'");
-                //             $stmt->execute();
-
-                //             return "SUCCESS";
-                //         } else {
-                //             $productCode = $data['productCode'];
-                //             $productName = $data['productName'];
-                //             $category = $data['category'];
-                //             $boxQuantity = $data['boxQuantity'];
-                //             $pcsPerBox = $data['pcsPerBox'];
-                //             $pricePerBox = $data['pricePerBox'];
-                //             $shippingFee = $data['shippingFee'];
-                //             $discount = $data['discount'];
-
-                //             $stmt = $conn->prepare("UPDATE `$tableName` SET `product code` = '$productCode', `product name` = '$productName', `category` = '$category', `box quantity` = '$boxQuantity', `pcs per box` = '$pcsPerBox', `price per box` = '$pricePerBox', `shipping fee` = '$shippingFee', `discount` = '$discount' WHERE `product code` = '$productCode'");
-                //             $stmt->execute();
-                //         }
-                //     };
-                //     break;
                 }
-        }
-
-        function deleteData($conn, $tableName, $data) {
-            $id = $data["id"];
-
-            $sql = "DELETE FROM `$tableName` WHERE `id` = $id";
-            $conn->exec($sql);
         }
     }
 ?>

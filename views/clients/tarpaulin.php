@@ -11,105 +11,64 @@
                 <form class="needs-validation" @submit.prevent="submitForm" action="" method="POST" enctype="multipart/form-data" novalidate>
                     <div class="mb-3">
                         <label class="form-label" for="product">Product Name</label>
-                        <input 
-                            type="text" 
-                            :class="[
+                        <input type="text" :class="[
                                 {'is-valid': validProductName},
                                 'form-control'
-                            ]" 
-                            v-model="product"
-                            name="product" 
-                            id="product" 
-                            placeholder="Product Name" 
-                            style="pointer-events: none;" 
-                            required
-                        />
+                            ]" v-model="product" name="product" id="product" placeholder="Product Name" style="pointer-events: none;" required />
                         <div class="invalid-feedback">Product name is required</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="quantity">Quantity</label>
-                        <input 
-                            type="number" 
-                            :class="[
+                        <input type="number" :class="[
                                 {'is-valid': validQuantity},
                                 {'is-invalid': !validQuantity && isSubmitted},
                                 'form-control'
-                            ]" 
-                            v-model="quantity" 
-                            name="quantity" 
-                            id="quantity" 
-                            @keyup="validateQuantity" 
-                            placeholder="Quantity" 
-                            required
-                        />
+                            ]" v-model="quantity" name="quantity" id="quantity" @keyup="validateQuantity" placeholder="Quantity" required />
                         <div class="invalid-feedback" v-if="!validQuantity">{{errQuantity}}</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="quantity">Tarpauline Size</label>
-                        <select
-                            :class="[
+                        <select :class="[
                                 {'is-valid': validSize},
                                 {'is-invalid': !validSize && isSubmitted},
                                 'form-select'
-                            ]" 
-                            name="size"
-                            id="size"
-                            v-model="size"
-                            @change="validateSize"
-                            aria-label="ID Size" 
-                            required
-                        >
+                            ]" name="size" id="size" v-model="size" @change="validateSize" aria-label="ID Size" required>
                             <option value="" selected>-- Select Tarpauline Size --</option>
-                            <option v-for="(size, index) in Object.keys(size_list)" :key="index" :value="size" >{{size}}</option>
+                            <option v-for="(size, index) in Object.keys(size_list)" :key="index" :value="size">{{size}}</option>
                         </select>
                         <div class="invalid-feedback" v-if="!validSize">{{errSize}}</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="price">Price</label>
-                        <input 
-                            type="number" 
-                            :class="[
+                        <input type="number" :class="[
                                 {'is-valid': validPrice && isSubmitted},
                                 {'is-invalid': !validPrice && isSubmitted},
                                 'form-control'
-                            ]" 
-                            v-model="price" 
-                            name="price" 
-                            id="price" 
-                            placeholder="Price" 
-                            style="pointer-events: none;" 
-                            required
-                        />
+                            ]" v-model="price" name="price" id="price" placeholder="Price" style="pointer-events: none;" required />
                         <div class="invalid-feedback" v-if="!validPrice">{{errPrice}}</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="picture">Tarpaulin Picture</label>
-                        <input 
-                            type="file" 
-                            :class="[
+                        <input type="file" :class="[
                                 {'is-valid': validPicture},
                                 {'is-invalid': !validPicture && isSubmitted},
                                 'form-control'
-                            ]" 
-                            name="picture" 
-                            id="picture" 
-                            @change="validatePicture" 
-                            placeholder="Picture" 
-                            required
-                        />
+                            ]" name="picture" id="picture" @change="validatePicture" placeholder="Picture" required />
                         <div class="invalid-feedback" v-if="!validPicture">{{errPicture}}</div>
                     </div>
                     <div class="d-grid">
                         <button type="submit" class="btn btn-primary">Add to cart</button>
                     </div>
-                </form> 
+                </form>
             </div>
         </div>
     </div>
 </section>
 
 <script>
-    const { createApp } = Vue
+    const {
+        createApp
+    } = Vue
 
     createApp({
         data() {
@@ -170,9 +129,15 @@
                 this.validateSize();
                 this.validatePicture();
 
-                const { validProductName, validQuantity, validSize, validPrice, validPicture } = this;
+                const {
+                    validProductName,
+                    validQuantity,
+                    validSize,
+                    validPrice,
+                    validPicture
+                } = this;
 
-                if(validProductName && validQuantity && validSize && validPrice && validPicture) {
+                if (validProductName && validQuantity && validSize && validPrice && validPicture) {
                     swal({
                         title: "Successfully added to cart!",
                         text: "View your items in cart",
@@ -183,10 +148,12 @@
                 }
             },
             validateQuantity() {
-                const { quantity } = this;
+                const {
+                    quantity
+                } = this;
 
-                if(this.isSubmitted) {
-                    if(quantity <= 0) {
+                if (this.isSubmitted) {
+                    if (quantity <= 0) {
                         this.errQuantity = "Quantity is required";
                         this.errPrice = "Answer all required fields";
                         this.validPrice = false;
@@ -197,10 +164,12 @@
                 this.getPrice();
             },
             validateSize() {
-                const { size } = this;
+                const {
+                    size
+                } = this;
 
-                if(this.isSubmitted) {
-                    if(size == "") {
+                if (this.isSubmitted) {
+                    if (size == "") {
                         this.errSize = "Tarpauline size is required";
                         this.validSize = false;
                     } else this.validSize = true;
@@ -211,8 +180,8 @@
             validatePicture() {
                 const FILE_PICTURE = document.getElementById('picture').value;
 
-                if(this.isSubmitted) {
-                    if(FILE_PICTURE == "") {
+                if (this.isSubmitted) {
+                    if (FILE_PICTURE == "") {
                         this.errPicture = "Tarpauline picture is required";
                         this.validPicture = false;
                         return;
@@ -223,7 +192,7 @@
                     const FILE_EXTERNAL = FILE[1];
                     const VALID_EXTERNAL = ["jpg", "jpeg", "png"];
 
-                    if(VALID_EXTERNAL.indexOf(FILE_EXTERNAL) == -1) {
+                    if (VALID_EXTERNAL.indexOf(FILE_EXTERNAL) == -1) {
                         this.errPicture = "File external should be .jpg, .jpeg, or .png";
                         this.validPicture = false;
                         return;
@@ -233,9 +202,13 @@
                 }
             },
             getPrice() {
-                const { size_list, quantity, size } = this;
+                const {
+                    size_list,
+                    quantity,
+                    size
+                } = this;
 
-                if(quantity > 0 && size != "") {
+                if (quantity > 0 && size != "") {
                     this.price = size_list[size] * quantity;
                     this.validPrice = true;
                 } else this.price = 0;

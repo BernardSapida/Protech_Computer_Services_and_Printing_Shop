@@ -42,91 +42,47 @@
                     <div class="row">
                         <div class="col-md-6 col-sm-12 mb-3">
                             <label class="form-label" for="firstname">Firstname</label>
-                            <input 
-                                type="text" 
-                                :class="[
+                            <input type="text" :class="[
                                     {'is-valid': validFirstname},
                                     {'is-invalid': !validFirstname && isSubmitted},
                                     'form-control'
-                                ]"
-                                v-model="firstname" 
-                                name="firstname"
-                                id="firstname" 
-                                @keyup="validateFirstname" 
-                                placeholder="Firstname"
-                                required
-                            />
+                                ]" v-model="firstname" name="firstname" id="firstname" @keyup="validateFirstname" placeholder="Firstname" required />
                             <div class="invalid-feedback" v-if="!validFirstname">{{errFirstname}}</div>
                         </div>
                         <div class="col-md-6 col-sm-12 mb-3">
                             <label class="form-label" for="lastname">Lastname {{validLastname}}</label>
-                            <input 
-                                type="text"
-                                :class="[
+                            <input type="text" :class="[
                                     {'is-valid': validLastname},
                                     {'is-invalid': !validLastname && isSubmitted},
                                     'form-control'
-                                ]"
-                                v-model="lastname"
-                                name="lastname"
-                                id="lastname"
-                                @keyup="validateLastname" 
-                                placeholder="Lastname"
-                                required
-                            />
+                                ]" v-model="lastname" name="lastname" id="lastname" @keyup="validateLastname" placeholder="Lastname" required />
                             <div class="invalid-feedback" v-if="!validLastname">{{errLastname}}</div>
                         </div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="form2Example17">Email address</label>
-                        <input 
-                            type="email" 
-                            :class="[
+                        <input type="email" :class="[
                                 {'is-valid': validEmail},
                                 {'is-invalid': !validEmail && isSubmitted},
                                 'form-control'
-                            ]" 
-                            v-model="email" 
-                            name="email"
-                            id="email" 
-                            @keyup="validateEmail" 
-                            placeholder="Email address" 
-                            required
-                        />
+                            ]" v-model="email" name="email" id="email" @keyup="validateEmail" placeholder="Email address" required />
                         <div class="invalid-feedback" v-if="!validEmail">{{errEmail}}</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="address">Address</label>
-                        <input 
-                            type="text"
-                            :class="[
+                        <input type="text" :class="[
                                 {'is-valid': validAddress},
                                 {'is-invalid': !validAddress && isSubmitted},
                                 'form-control'
-                            ]"
-                            v-model="address"
-                            name="address"
-                            id="address"
-                            @keyup="validateAddress" 
-                            placeholder="Address"
-                            required
-                        />
+                            ]" v-model="address" name="address" id="address" @keyup="validateAddress" placeholder="Address" required />
                         <div class="invalid-feedback" v-if="!validAddress">{{errAddress}}</div>
                     </div>
                     <div class="mb-3">
-                        <select 
-                            :class="[
+                        <select :class="[
                                 {'is-valid': validPaymentOption},
                                 {'is-invalid': !validPaymentOption && isSubmitted},
                                 'form-select'
-                            ]"
-                            name="paymentOption"
-                            id="paymentOption"
-                            v-model="paymentOption"
-                            @change="validatePaymentOption" 
-                            aria-label="Payment Option"
-                            required
-                        >
+                            ]" name="paymentOption" id="paymentOption" v-model="paymentOption" @change="validatePaymentOption" aria-label="Payment Option" required>
                             <option value="" selected>-- Select Mode of Payment --</option>
                             <option value="Onsite payment">On-site Payment</option>
                             <option value="Gcash payment">Gcash Payment</option>
@@ -137,57 +93,30 @@
                         <div class="row mb-3">
                             <div class="col-md-6 col-sm-12">
                                 <label class="form-label" for="gcashName">Gcash Name</label>
-                                <input 
-                                    type="text" 
-                                    :class="[
+                                <input type="text" :class="[
                                         {'is-valid': validGcashName},
                                         {'is-invalid': !validGcashName && isSubmitted},
                                         'form-control'
-                                    ]"
-                                    v-model="gcashName" 
-                                    name="gcashName"
-                                    id="gcashName" 
-                                    @keyup="validateGcashName" 
-                                    placeholder="Gcash Name"
-                                    required
-                                />
+                                    ]" v-model="gcashName" name="gcashName" id="gcashName" @keyup="validateGcashName" placeholder="Gcash Name" required />
                                 <div class="invalid-feedback" v-if="!validGcashName">{{errGcashName}}</div>
                             </div>
                             <div class="col-md-6 col-sm-12">
                                 <label class="form-label" for="gcashNumber">Gcash Number</label>
-                                <input 
-                                    type="text"
-                                    :class="[
+                                <input type="text" :class="[
                                         {'is-valid': validGcashNumber},
                                         {'is-invalid': !validGcashNumber && isSubmitted},
                                         'form-control'
-                                    ]"
-                                    v-model="gcashNumber"
-                                    name="gcashNumber"
-                                    id="gcashNumber"
-                                    @keyup="validateGcashNumber" 
-                                    placeholder="Gcash number"
-                                    required
-                                />
+                                    ]" v-model="gcashNumber" name="gcashNumber" id="gcashNumber" @keyup="validateGcashNumber" placeholder="Gcash number" required />
                                 <div class="invalid-feedback" v-if="!validGcashNumber">{{errGcashNumber}}</div>
                             </div>
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="referenceNo">Payment Reference No.</label>
-                            <input 
-                                type="text"
-                                :class="[
+                            <input type="text" :class="[
                                     {'is-valid': validReferenceNo},
                                     {'is-invalid': !validReferenceNo && isSubmitted},
                                     'form-control'
-                                ]"
-                                v-model="referenceNo"
-                                name="referenceNo"
-                                id="referenceNo"
-                                @keyup="validateReferenceNo" 
-                                placeholder="Reference number"
-                                required
-                            />
+                                ]" v-model="referenceNo" name="referenceNo" id="referenceNo" @keyup="validateReferenceNo" placeholder="Reference number" required />
                             <div class="invalid-feedback" v-if="!validReferenceNo">{{errReferenceNo}}</div>
                         </div>
                     </div>
@@ -209,7 +138,9 @@
 </section>
 
 <script>
-    const { createApp } = Vue
+    const {
+        createApp
+    } = Vue
 
     createApp({
         created() {
@@ -217,7 +148,7 @@
         },
         watch: {
             paymentOption(option) {
-                if(option == "Onsite payment") {
+                if (option == "Onsite payment") {
                     this.referenceNo = "None";
                     this.validGcashName = this.validGcashNumber = this.validReferenceNo = true;
                 } else if (option == "Gcash payment") {
@@ -272,18 +203,35 @@
                 this.validateEmail();
                 this.validateAddress();
                 this.validatePaymentOption();
-                
-                if(this.paymentOption == "Gcash payment") {
+
+                if (this.paymentOption == "Gcash payment") {
                     this.validateGcashName();
                     this.validateGcashNumber();
                     this.validateReferenceNo();
                 }
 
-                const { firstname, lastname, email, address, gcashName, gcashNumber, referenceNo, cart_items, total, validFirstname, validLastname, validEmail, validAddress, validGcashName, validGcashNumber, validReferenceNo } = this;
+                const {
+                    firstname,
+                    lastname,
+                    email,
+                    address,
+                    gcashName,
+                    gcashNumber,
+                    referenceNo,
+                    cart_items,
+                    total,
+                    validFirstname,
+                    validLastname,
+                    validEmail,
+                    validAddress,
+                    validGcashName,
+                    validGcashNumber,
+                    validReferenceNo
+                } = this;
 
 
-                if(validFirstname && validLastname && validEmail && validAddress && validGcashName && validGcashNumber && validReferenceNo) {
-                    if(cart_items.length == 0) {
+                if (validFirstname && validLastname && validEmail && validAddress && validGcashName && validGcashNumber && validReferenceNo) {
+                    if (cart_items.length == 0) {
                         swal({
                             title: "Checkout is prohibited",
                             text: "Please add items to your cart",
@@ -324,8 +272,8 @@
                 swal("Are you sure you want to remove it?", {
                     dangerMode: true,
                     buttons: ["Cancel", "Remove"],
-                }).then(async(remove) => {
-                    if(remove) {
+                }).then(async (remove) => {
+                    if (remove) {
                         let response = await axios({
                             method: 'POST',
                             url: 'includes/removeCartItem.inc.php',
@@ -348,131 +296,129 @@
                 console.log(response.data)
             },
             validateFirstname() {
-                const { firstname } = this;
-                
-                if(this.isSubmitted) {
-                    if(firstname.length == 0) {
+                const {
+                    firstname
+                } = this;
+
+                if (this.isSubmitted) {
+                    if (firstname.length == 0) {
                         this.errFirstname = "Firstname is required";
                         this.validFirstname = false;
-                    }
-                    else if(firstname.length < 2) {
+                    } else if (firstname.length < 2) {
                         this.errFirstname = "First name is too short";
                         this.validFirstname = false;
-                    }
-                    else if(!/^[A-z]+$/.test(firstname)) {
+                    } else if (!/^[A-z]+$/.test(firstname)) {
                         this.errFirstname = "First name is invalid";
                         this.validFirstname = false;
-                    }
-                    else this.validFirstname = true;
+                    } else this.validFirstname = true;
                 }
             },
             validateLastname() {
-                const { lastname } = this;
-                
-                if(this.isSubmitted) {
-                    if(lastname.length == 0) {
+                const {
+                    lastname
+                } = this;
+
+                if (this.isSubmitted) {
+                    if (lastname.length == 0) {
                         this.errLastname = "Lastname is required";
                         this.validLastname = false;
-                    }
-                    else if(lastname.length < 2) {
+                    } else if (lastname.length < 2) {
                         this.errLastname = "Lastname is too short";
                         this.validLastname = false;
-                    }
-                    else if(!/^[A-z]+$/.test(lastname)) {
+                    } else if (!/^[A-z]+$/.test(lastname)) {
                         this.errLastname = "Last name is invalid";
                         this.validLastname = false;
-                    }
-                    else this.validLastname = true;
+                    } else this.validLastname = true;
                 }
             },
             validateEmail() {
-                const { email } = this;
-                
-                if(this.isSubmitted) {
-                    if(email.length == 0) {
+                const {
+                    email
+                } = this;
+
+                if (this.isSubmitted) {
+                    if (email.length == 0) {
                         this.errEmail = "Email is required";
                         this.validEmail = false;
-                    }
-                    else if(!email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+                    } else if (!email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
                         this.errEmail = "Email is invalid";
                         this.validEmail = false;
-                    }
-                    else this.validEmail = true;
+                    } else this.validEmail = true;
                 }
             },
             validateAddress() {
-                const { address } = this;
-                
-                if(this.isSubmitted) {
-                    if(address.length == 0) {
+                const {
+                    address
+                } = this;
+
+                if (this.isSubmitted) {
+                    if (address.length == 0) {
                         this.errAddress = "Address is required";
                         this.validAddress = false;
-                    }
-                    else if(address.length < 5) {
+                    } else if (address.length < 5) {
                         this.errAddress = "Address is invalid";
                         this.validAddress = false;
-                    }
-                    else this.validAddress = true;
+                    } else this.validAddress = true;
                 }
             },
             validatePaymentOption() {
-                const { paymentOption } = this;
-                
-                if(this.isSubmitted) {
-                    if(paymentOption.length == 0) {
+                const {
+                    paymentOption
+                } = this;
+
+                if (this.isSubmitted) {
+                    if (paymentOption.length == 0) {
                         this.errPaymentOption = "Mode of payment is required";
                         this.validPaymentOption = false;
-                    }
-                    else this.validPaymentOption = true;
+                    } else this.validPaymentOption = true;
                 }
             },
             validateGcashName() {
-                const { gcashName } = this;
-                
-                if(this.isSubmitted) {
-                    if(gcashName.length == 0) {
+                const {
+                    gcashName
+                } = this;
+
+                if (this.isSubmitted) {
+                    if (gcashName.length == 0) {
                         this.errGcashName = "Gcash name is required";
                         this.validGcashName = false;
-                    }
-                    else if(gcashName.length < 5) {
+                    } else if (gcashName.length < 5) {
                         this.errGcashName = "Gcash name is too short";
                         this.validGcashName = false;
-                    }
-                    else if(!/^[A-z ]+$/.test(gcashName)) {
+                    } else if (!/^[A-z ]+$/.test(gcashName)) {
                         this.errGcashName = "Gcash name is invalid";
                         this.validGcashName = false;
-                    }
-                    else this.validGcashName = true;
+                    } else this.validGcashName = true;
                 }
             },
             validateGcashNumber() {
-                const { gcashNumber } = this;
-                
-                if(this.isSubmitted) {
-                    if(gcashNumber.length == 0) {
+                const {
+                    gcashNumber
+                } = this;
+
+                if (this.isSubmitted) {
+                    if (gcashNumber.length == 0) {
                         this.errGcashNumber = "Gcash number is required";
                         this.validGcashNumber = false;
-                    }
-                    else if(!/^(09)[0-9]{9}$/.test(gcashNumber) && !gcashNumber.length != 11) {
+                    } else if (!/^(09)[0-9]{9}$/.test(gcashNumber) && !gcashNumber.length != 11) {
                         this.errGcashNumber = "Gcash number is invalid";
                         this.validGcashNumber = false;
-                    }
-                    else this.validGcashNumber = true;
+                    } else this.validGcashNumber = true;
                 }
             },
             validateReferenceNo() {
-                const { referenceNo } = this;
-                
-                if(this.isSubmitted) {
-                    if(referenceNo.length == 0) {
+                const {
+                    referenceNo
+                } = this;
+
+                if (this.isSubmitted) {
+                    if (referenceNo.length == 0) {
                         this.errReferenceNo = "Reference number is required";
                         this.validReferenceNo = false;
-                    }
-                    else if(referenceNo.length != 13) {
+                    } else if (referenceNo.length != 13) {
                         this.errReferenceNo = "Reference number is invalid";
                         this.validReferenceNo = false;
-                    }
-                    else this.validReferenceNo = true;
+                    } else this.validReferenceNo = true;
                 }
             },
         }

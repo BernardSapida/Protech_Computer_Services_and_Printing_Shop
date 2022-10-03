@@ -6,7 +6,6 @@
     session_start();
 
     $db = new Database();
-
     $data = json_decode(file_get_contents("php://input"), true);
 
     if(!empty($data)) {

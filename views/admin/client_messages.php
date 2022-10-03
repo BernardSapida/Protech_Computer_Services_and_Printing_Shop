@@ -15,7 +15,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr   tr v-for="(items, index) in table_messages" :id="index" :key="index">
+                    <tr tr v-for="(items, index) in table_messages" :id="index" :key="index">
                         <td>{{items["id"]}}</td>
                         <td>{{items["firstname"]}} {{items["lastname"]}}</td>
                         <td>{{items["email"]}}</td>
@@ -31,7 +31,9 @@
 </section>
 
 <script>
-    const { createApp } = Vue
+    const {
+        createApp
+    } = Vue
 
     createApp({
         created() {

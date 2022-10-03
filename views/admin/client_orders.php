@@ -60,25 +60,13 @@
                         <td>Php {{items["total"].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</td>
                         <td>{{items["reference_no"]}}</td>
                         <td>
-                            <select 
-                                class="form-select"
-                                aria-label="Transaction Status"
-                                :value="items['transaction_status']"
-                                @change="updateTransactionStatus($event, items['transaction_number'])" 
-                                required
-                            >
+                            <select class="form-select" aria-label="Transaction Status" :value="items['transaction_status']" @change="updateTransactionStatus($event, items['transaction_number'])" required>
                                 <option value="Not paid">Not paid</option>
                                 <option value="Paid">Paid</option>
                             </select>
                         </td>
                         <td>
-                            <select 
-                                class="form-select"
-                                aria-label="Item Status"
-                                :value="items['item_status']"
-                                @change="updateItemStatus($event, items['transaction_number'])" 
-                                required
-                            >
+                            <select class="form-select" aria-label="Item Status" :value="items['item_status']" @change="updateItemStatus($event, items['transaction_number'])" required>
                                 <option value="Pending">Pending</option>
                                 <option value="Processing">Processing</option>
                                 <option value="Ready to claim">Ready to claim</option>
@@ -97,7 +85,9 @@
 </section>
 
 <script>
-    const { createApp } = Vue
+    const {
+        createApp
+    } = Vue
 
     createApp({
         created() {
@@ -134,7 +124,7 @@
                         itemStatus: selectedOption,
                     }
                 });
-                
+
                 window.location.reload();
             },
             async updateTransactionStatus(e, transactioNumber) {
@@ -153,14 +143,14 @@
             },
             async getTotalIncome() {
                 total = 0;
-                
+
                 let response = await axios({
                     method: 'GET',
                     url: 'includes/totalIncome.inc.php'
                 });
-                
+
                 response.data.forEach(obj => {
-                    if(obj["transaction_status"] == "Paid") {
+                    if (obj["transaction_status"] == "Paid") {
                         const entries = JSON.parse(obj['items']);
                         entries.forEach(entry => total += +entry["price"]);
                     }
@@ -173,7 +163,7 @@
                     method: 'GET',
                     url: 'includes/totalClients.inc.php'
                 });
-                
+
                 this.totalClients = response.data.length;
             },
             async getTotalIncompleteOrders() {

@@ -22,7 +22,8 @@
                     <tr tr v-for="(items, index) in table_accounts" :id="index" :key="index">
                         <td>{{items["id"]}}</td>
                         <td>
-                        <img :src="'/pcsps/public/images/profile/'+items['image']" id="profile_picture" alt="profile picture" style="width: 50px;" class="rounded"></td>
+                            <img :src="'/pcsps/public/images/profile/'+items['image']" id="profile_picture" alt="profile picture" style="width: 50px;" class="rounded">
+                        </td>
                         <td>{{items["firstname"]}}</td>
                         <td>{{items["lastname"]}}</td>
                         <td>{{items["email"]}}</td>
@@ -40,7 +41,9 @@
 </section>
 
 <script>
-    const { createApp } = Vue
+    const {
+        createApp
+    } = Vue
 
     createApp({
         created() {
