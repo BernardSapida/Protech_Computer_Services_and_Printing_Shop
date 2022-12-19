@@ -35,7 +35,7 @@
 </section>
 
 <script>
-    const redirectToID = () => window.location.href = "http://localhost/pcsps/index.php?page=addtocart&&item=id";
-    const redirectToDocument = () => window.location.href = "http://localhost/pcsps/index.php?page=addtocart&&item=document";
-    const redirectToTarpaulin = () => window.location.href = "http://localhost/pcsps/index.php?page=addtocart&&item=tarpaulin";
+    const redirectToID = () => window.location.href = "http://localhost/Protech_Computer_Services_and_Printing_Shop/index.php?page=addtocart&&item=id";
+    const redirectToDocument = () => window.location.href = "http://localhost/Protech_Computer_Services_and_Printing_Shop/index.php?page=addtocart&&item=document";
+    const redirectToTarpaulin = () => window.location.href = "http://localhost/Protech_Computer_Services_and_Printing_Shop/index.php?page=addtocart&&item=tarpaulin";
 </script>

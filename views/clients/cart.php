@@ -120,10 +120,6 @@
                                 ]" v-model="referenceNo" name="referenceNo" id="referenceNo" @keyup="validateReferenceNo" placeholder="Reference number" required />
                             <div class="invalid-feedback" v-if="!validReferenceNo">{{errReferenceNo}}</div>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label" for="gcashPayment">Upload Gcash Payment</label>
-                            <input type="file" class="form-control" id="gcashPayment">
-                        </div>
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-12">

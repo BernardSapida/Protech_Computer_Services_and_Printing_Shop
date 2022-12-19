@@ -6,6 +6,8 @@
     $db = new Database();
     $data = json_decode(file_get_contents("php://input"), true);
 
+    var_dump($data);
+
     if(!empty($data)) {
         $uid = $_SESSION["uid"];
         $firstname = $data["firstname"];
