@@ -1,8 +1,10 @@
 <?php include_once "includes/clientPageRestriction.inc.php" ?>
 <section class="my-5" id="app">
     <div class="container">
-        <h2>Order Status</h2>
-        <p class="text-secondary">Monitor your order status</p>
+        <div class="text-center">
+            <h2>Order Status</h2>
+            <p class="text-secondary">Monitor your order status</p>
+        </div>
         <hr>
         <div class="table-responsive">
             <table class="table table-hover">

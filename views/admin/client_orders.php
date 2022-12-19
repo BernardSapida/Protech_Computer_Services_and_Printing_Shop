@@ -76,7 +76,7 @@
                         <td>{{items["date"]}}</td>
                     </tr>
                     <tr v-if="table_orders.length == 0">
-                        <td class="text-center" colspan="7">Empty</td>
+                        <td class="text-center" colspan="9">Empty</td>
                     </tr>
                 </tbody>
             </table>

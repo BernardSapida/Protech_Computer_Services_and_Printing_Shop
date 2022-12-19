@@ -78,6 +78,7 @@
                         <div class="invalid-feedback" v-if="!validAddress">{{errAddress}}</div>
                     </div>
                     <div class="mb-3">
+                        <label class="form-label" for="paymentOption">Mode of Payment</label>
                         <select :class="[
                                 {'is-valid': validPaymentOption},
                                 {'is-invalid': !validPaymentOption && isSubmitted},
@@ -118,6 +119,10 @@
                                     'form-control'
                                 ]" v-model="referenceNo" name="referenceNo" id="referenceNo" @keyup="validateReferenceNo" placeholder="Reference number" required />
                             <div class="invalid-feedback" v-if="!validReferenceNo">{{errReferenceNo}}</div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="gcashPayment">Upload Gcash Payment</label>
+                            <input type="file" class="form-control" id="gcashPayment">
                         </div>
                     </div>
                 </div>
